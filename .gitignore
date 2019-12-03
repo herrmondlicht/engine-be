@@ -1,3 +1,6 @@
-# node modules
-
+# node related
 node_modules
+.env
+
+#api related
+build
