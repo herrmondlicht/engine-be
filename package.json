@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "nodemon --exec babel-node src/index.js",
-    "start": "",
+    "start": "node build/index.js",
     "build": "rm -rf ./build && babel src -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,14 +20,17 @@
   },
   "homepage": "https://github.com/herrmondlicht/engine-be#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.1"
   }
 }
