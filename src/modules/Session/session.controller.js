@@ -10,7 +10,7 @@ export default () => ({
   }
 });
 
-const authenticateUser = ({ username, password }) => {
+export const authenticateUser = ({ username, password }) => {
   const { USERNAME, PASSWORD, SECRET } = process.env;
   if (username === USERNAME && password === PASSWORD) {
     const token = jwt.sign(
