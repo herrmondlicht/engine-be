@@ -9,9 +9,11 @@
     "build": "rm -rf ./build && babel src -d build",
     "test": "jest --watchAll"
   },
-  "jest":{
-    "verbose":true, 
-    "setupFiles": ["./jest.setup.js"]
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "./jest.setup.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
   "homepage": "https://github.com/herrmondlicht/engine-be#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1"
