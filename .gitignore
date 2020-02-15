@@ -1,6 +1,7 @@
 # node related
 node_modules
 .env
+.env.test
 
 #api related
 build

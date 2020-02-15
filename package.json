@@ -7,7 +7,8 @@
     "start-dev": "nodemon --exec babel-node src/index.js",
     "start": "node build/index.js",
     "build": "rm -rf ./build && babel src -d build",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "start-db": "bash ./database_structure/docker-creation.sh"
   },
   "jest": {
     "verbose": true,
