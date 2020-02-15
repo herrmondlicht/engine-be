@@ -1,0 +1,1 @@
+ docker run -d -p 3307:3306 --name engine-mysql -e MYSQL_ROOT_PASSWORD=enginpswd -v /home/gms/projects/engine-db/db_structure.sql:/docker-entrypoint-initdb.d/01.sql mysql:5.7
