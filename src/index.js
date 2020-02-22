@@ -20,6 +20,15 @@ app.use("/api", appRoutes);
 
 app.get("/", (req, res) => res.send({ api: "OK" }));
 
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({
+      status: 401,
+      message: "Invalid token"
+    });
+  }
+});
+
 app.use(function errorHandler(err, req, res, next) {
   console.log(err);
   res.status(500).json({
