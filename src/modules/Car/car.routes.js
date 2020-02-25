@@ -8,8 +8,8 @@ const carController = CarController({carService});
 
 
 router.get("/", carController.list);
-router.get("/:carId", carController.list)
 router.post("/", carController.create);
 router.put("/", carController.update);
+router.get("/:id", carController.byId)
 
 export default router;
