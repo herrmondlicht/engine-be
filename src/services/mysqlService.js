@@ -66,5 +66,7 @@ function connectToDB(dbconfig = _dbconfig) {
 
 export default () => ({
 	query,
-	connectionWithTransaction
+	connectionWithTransaction,
+	querySQLWithConnection,
+	connectToDB,
 })
