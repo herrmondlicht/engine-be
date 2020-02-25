@@ -21,6 +21,8 @@ create table cars(
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
 );
 
+ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year);
+
 create table customer_cars(
 	id INT(10) not null auto_increment primary key,
     license_plate VARCHAR(10),
