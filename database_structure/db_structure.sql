@@ -22,6 +22,10 @@ create table cars(
 );
 
 ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year);
+ALTER TABLE `engine`.`cars` 
+CHANGE COLUMN `model` `model` VARCHAR(10) NOT NULL ,
+CHANGE COLUMN `make` `make` VARCHAR(10) NOT NULL ,
+CHANGE COLUMN `manufacture_year` `manufacture_year` INT(4) NOT NULL ;
 
 create table customer_cars(
 	id INT(10) not null auto_increment primary key,
