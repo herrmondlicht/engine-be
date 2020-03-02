@@ -33,7 +33,7 @@ export default ({ carService }) => ({
       const car = await carService.addCar(body)
       res.status(200).json({
         created: true,
-        data: car
+        data: car[0]
       })
     }
     catch (e) {
