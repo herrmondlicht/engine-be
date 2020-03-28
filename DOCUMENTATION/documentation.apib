@@ -1,0 +1,355 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Engine API
+
+API for the Engine backend.
+
+### For all get endpoints
+- simple queries can be done using the `q` query parameter, as in `/resource?q={}`
+- limit can be done using the `limit` query parameter, as in `/resource?limit=10` where 10 would be the number you would like to limit by
+- simple inner joining can be done using the `include` query parameter, as in `/resource?include="cars,customers"`. The names must be separated by comma
+- you can select the fields you'd like to bring with the `fields` query parameter, as in `resource?fields="id,name"`. The names must be separated by comma
+
+# Group Session
+
+Holds generic information about cars.
+
+## Authenticate User [/session/login]
+
+### Login User [POST]
++ Attributes (object)
+    + username: admin (string, required) - user's username
+    + password: 1234 (number, required) - user's password
+    
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODUxNzQxMTMsImV4cCI6MTU4NTI2MDUxM30.2zWV5agDW9a-S4_VQTtlnI4gohZD4QsUfdA_WwLAJII"
+        }
+
+
+# Group Cars
+
+Holds generic information about cars.
+
+## Cars Collection [/cars]
+
+### List All Cars [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": 1,
+                    "model": "Gol",
+                    "make": "VW",
+                    "manufacture_year": 2010,
+                    "created_at": "2020-02-15T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                },
+                {
+                    "id": 2,
+                    "model": "Polo",
+                    "make": "VW",
+                    "manufacture_year": 2015,
+                    "created_at": "2020-02-22T20:12:39.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                },
+                {
+                    "id": 6,
+                    "model": "i30",
+                    "make": "Hyundai",
+                    "manufacture_year": 2014,
+                    "created_at": "2020-02-25T20:20:33.000Z",
+                    "updated_at": "2020-02-25T20:20:33.000Z"
+                },
+                {
+                    "id": 12,
+                    "model": "i30",
+                    "make": "Hyundai",
+                    "manufacture_year": 2015,
+                    "created_at": "2020-02-25T20:28:55.000Z",
+                    "updated_at": "2020-02-25T20:28:55.000Z"
+                },
+                {
+                    "id": 34,
+                    "model": "i30",
+                    "make": "Hyundai",
+                    "manufacture_year": 2013,
+                    "created_at": "2020-02-25T21:34:34.000Z",
+                    "updated_at": "2020-02-25T21:34:34.000Z"
+                },
+                {
+                    "id": 46,
+                    "model": "i3",
+                    "make": "BMW",
+                    "manufacture_year": 2018,
+                    "created_at": "2020-02-25T21:49:13.000Z",
+                    "updated_at": "2020-02-25T21:49:13.000Z"
+                },
+                {
+                    "id": 48,
+                    "model": "i3",
+                    "make": "BMW",
+                    "manufacture_year": 2019,
+                    "created_at": "2020-02-25T21:49:23.000Z",
+                    "updated_at": "2020-02-25T21:49:23.000Z"
+                },
+                {
+                    "id": 56,
+                    "model": "Golf",
+                    "make": "VW",
+                    "manufacture_year": 2010,
+                    "created_at": "2020-02-25T23:08:42.000Z",
+                    "updated_at": "2020-02-25T23:08:42.000Z"
+                },
+                {
+                    "id": 58,
+                    "model": "C3",
+                    "make": "Citroen",
+                    "manufacture_year": 2010,
+                    "created_at": "2020-02-29T16:00:32.000Z",
+                    "updated_at": "2020-02-29T16:00:32.000Z"
+                },
+                {
+                    "id": 64,
+                    "model": "i30",
+                    "make": "Hyundai",
+                    "manufacture_year": 2010,
+                    "created_at": "2020-03-01T19:17:26.000Z",
+                    "updated_at": "2020-03-01T19:17:26.000Z"
+                }
+            ]
+        }
+        
+### Insert New Car [POST]
+
++ Attributes (object)
+    + make: BMW (string, required) - Name of manufacturer
+    + model: i3 (string, required) - Name of the car
+    + manufacture_year: 2010 (number, required) - Year the car was manufactured
+
++ Response 200 (application/json)
+
+        {
+            "created": true,
+            "data": {
+                "id": 48,
+                "model": "i3",
+                "make": "BMW",
+                "manufacture_year": 2019,
+                "created_at": "2020-02-25T21:49:23.000Z",
+                "updated_at": "2020-02-25T21:49:23.000Z"
+            }
+        }
+
+## Car [/cars/{id}]
+
+### Get Car By Id [GET]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the car.
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "id": 1,
+                "model": "Gol",
+                "make": "VW",
+                "manufacture_year": 2010,
+                "created_at": "2020-02-15T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+
+# Group Customer
+
+Holds information about the customer
+
+## Customer Collection [/customers]
+
+### List All Customers [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id":1, 
+                    "document_number": 45612312390, 
+                    "fullname": "John Dias", 
+                    "address": "45, Merchant Street, Valletta", 
+                    "phone": "192381714474", 
+                    "date_of_birth": "1990-02-15", 
+                    "created_at": "2020-02-15T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                },
+                {
+                    "id":2, 
+                    "document_number": 12312312300, 
+                    "fullname": "John Silva", 
+                    "address": "89, Avenida Ipiranga, São Paulo", 
+                    "phone": "95279921", 
+                    "date_of_birth": "1980-05-25", 
+                    "created_at": "2020-01-16T20:43:46.000Z",
+                    "updated_at": "2020-03-23T20:12:39.000Z"
+                },
+                {
+                    "id":3 
+                    "document_number": 32132132145, 
+                    "fullname": "Pedro de Alcântra", 
+                    "address": "1923, Estrada das Taipas, São Paulo", 
+                    "phone": "95844823", 
+                    "date_of_birth": "1995-20-15", 
+                    "created_at": "2020-01-17T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                },
+                {
+                    "id":4, 
+                    "document_number": 12312312301, 
+                    "fullname": "John Fernando", 
+                    "address": "237, Via degli Angeli, Roma", 
+                    "phone": "1923744955", 
+                    "date_of_birth": "1991-03-15", 
+                    "created_at": "2020-01-18T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                },
+                {
+                    "id":5, 
+                    "document_number": null, 
+                    "fullname": "John Fernando", 
+                    "address": null, 
+                    "phone": null, 
+                    "date_of_birth": "1990-08-19", 
+                    "created_at": "2020-01-19T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                }
+            ]
+        }
+        
+### Insert New Customer [POST]
+
++ Attributes (object)
+    + document_number: 12312332190 (number) - Document Number from the customer 
+    + fullname: John Fernando (string, required) - Customer's name
+    + address: 799 R. Augusto Bordin, Gramado (string) - Customer's address
+    + phone: 282331239 (string) - Customer's phone number
+    + email: john.fernando@email.com (string) - Customer's email
+    + date_of_birth: 1990-08-19 (string) - Customer's Birth Date
+
++ Response 200 (application/json)
+
+        {
+            "created": true,
+            "data": {
+                "id":4, 
+                "document_number": 12312312301, 
+                "fullname": "John Fernando", 
+                "address": "237, Via degli Angeli, Roma", 
+                "date_of_birth": "1991-03-15", 
+                "created_at": "2020-01-18T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+        
+## Customer Cars Collection [/customers/{id}/cars]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the customer.
+
+### List All Customers cars [GET]
+
+This example below would be using the `include` query parameter
+
+
+    
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id":1, 
+                    "license_plate": "ABC1234", 
+                    "car_id": 1, 
+                    "customer_id": 1, 
+                    "displacement": "1.0", 
+                    "color": "Black", 
+                    "created_at": "2020-01-18T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "car": {
+                        "id": 1,
+                        "model": "Gol",
+                        "make": "VW",
+                        "manufacture_year": 2010,
+                        "created_at": "2020-02-15T20:43:46.000Z",
+                        "updated_at": "2020-02-22T20:12:39.000Z"
+                    }
+                },
+                {
+                    "id":2, 
+                    "license_plate": "ABC1235", 
+                    "car_id": 2, 
+                    "customer_id": 1, 
+                    "displacement": "1.5", 
+                    "color": "Yellow", 
+                    "created_at": "2020-01-18T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                        "car": {
+                        "id": 2,
+                        "model": "Polo",
+                        "make": "VW",
+                        "manufacture_year": 2015,
+                        "created_at": "2020-02-22T20:12:39.000Z",
+                        "updated_at": "2020-02-22T20:12:39.000Z"
+                    }
+                },
+                {
+                    "id":1, 
+                    "license_plate": "ABC1236", 
+                    "car_id": 6, 
+                    "customer_id": 1, 
+                    "displacement": "1.0", 
+                    "color": "Brown", 
+                    "created_at": "2020-01-18T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "car": {
+                        "id": 6,
+                        "model": "i30",
+                        "make": "Hyundai",
+                        "manufacture_year": 2014,
+                        "created_at": "2020-02-25T20:20:33.000Z",
+                        "updated_at": "2020-02-25T20:20:33.000Z"
+                    }
+                }
+            ]
+        }
+        
+### Insert New Customer Car [POST]
+
++ Attributes (object)
+    + license_plate: ABC1234 (string, required) - Customer car's license plates 
+    + car_id: 1 (number, required) - Customer's pre-registered generic car id (lookup cars above)
+    + customer_id: 1 (number, required) - Customer id (lookup customers above)
+    + displacement: "1.0" (string, required) - Displacement of the car eg: "1.0" "1.6"
+    + color: "Black" (string, required) - Customer Car's color
+
++ Response 200 (application/json)
+
+        {
+            "created": true,
+            "data": {
+                "id":1, 
+                "license_plate": "ABC1236", 
+                "car_id": 6, 
+                "customer_id": 1, 
+                "displacement": "1.0", 
+                "color": "Brown", 
+                "created_at": "2020-01-18T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
