@@ -8,11 +8,14 @@ export default ({ queryService = queryHelperService(), mysqlService = MySqlServi
   };
 
   const addCar = async (data, { connection = mysqlService.connectToDB() } = {}) => {
-    await mysqlService.querySQLWithConnection(connection)(`
+    await mysqlService.querySQLWithConnection(connection)(
+      `
         INSERT INTO cars SET ?
         ON DUPLICATE KEY UPDATE
         ?;
-    `, [data, data]);
+    `,
+      [data, data]
+    );
     const selectFromInsert = await queryService.getFrom('cars', { query: data });
     return selectFromInsert;
   };

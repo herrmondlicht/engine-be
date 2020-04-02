@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: '1mb' }));
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  }),
+  })
 );
 
 // load routes
@@ -22,7 +22,7 @@ app.use('/api', appRoutes);
 
 app.get('/', (req, res) => res.send({ api: 'OK' }));
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({
       status: 401,
@@ -31,8 +31,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.use((err, req, res, next) => {
-  console.log(err);
+app.use((err, req, res) => {
   res.status(500).json({
     status: 500,
     message: 'something went wrong',
@@ -40,5 +39,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`App is now running on port ${PORT}`);
 });

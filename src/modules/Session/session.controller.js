@@ -1,15 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-export default () => ({
-  login: (req, res) => {
-    const response = authenticateUser(req.body);
-    if (response) return res.status(200).json(response);
-    return res
-      .status(401)
-      .json({ status: 401, errorText: 'Invalid username or password' });
-  },
-});
-
 export const authenticateUser = ({ username, password }) => {
   const { USERNAME, PASSWORD, SECRET } = process.env;
   if (username === USERNAME && password === PASSWORD) {
@@ -18,8 +8,20 @@ export const authenticateUser = ({ username, password }) => {
         role: 'admin',
       },
       SECRET,
-      { expiresIn: '24h' },
+      { expiresIn: '24h' }
     );
     return { token };
   }
+  throw new Error('Wrong username/password');
 };
+
+export default () => ({
+  login: (req, res) => {
+    try {
+      const response = authenticateUser(req.body);
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(401).json({ status: 401, errorText: error.message });
+    }
+  },
+});

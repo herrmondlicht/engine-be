@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const { DB_PASSWORD, DB_HOST } = process.env;
 
-const _dbconfig = {
+export const DATABASE_CONFIG = {
   host: DB_HOST,
   password: DB_PASSWORD,
   database: 'engine',
@@ -12,6 +12,14 @@ const _dbconfig = {
   port: 3307,
 };
 
+function connectToDB(dbconfig = DATABASE_CONFIG) {
+  const connection = mysql.createConnection({
+    ...dbconfig,
+    multipleStatements: true,
+  });
+  connection.connect();
+  return connection;
+}
 
 function connectionWithTransaction() {
   const connection = connectToDB();
@@ -30,37 +38,24 @@ function connectionWithTransaction() {
 }
 
 function querySQLWithConnection(connection) {
-  return (query, options) => new Promise((resolve, reject) => {
-    try {
-      connection.query(query, options, (err, results, fields) => {
-        if (err) return reject(err);
-        return resolve(results);
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
+  return (queryString, options) =>
+    new Promise((resolve, reject) => {
+      try {
+        connection.query(queryString, options, (err, results) => {
+          if (err) return reject(err);
+          return resolve(results);
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
 }
 
-async function query(query, options) {
-  try {
-    const connection = connectToDB();
-    const result = await querySQLWithConnection(connection)(query, options);
-    connection.end();
-    return result;
-  } catch (e) {
-    console.log(e);
-    throw e;
-  }
-}
-
-function connectToDB(dbconfig = _dbconfig) {
-  const connection = mysql.createConnection({
-    ...dbconfig,
-    multipleStatements: true,
-  });
-  connection.connect();
-  return connection;
+async function query(queryString, options) {
+  const connection = connectToDB();
+  const result = await querySQLWithConnection(connection)(queryString, options);
+  connection.end();
+  return result;
 }
 
 export default () => ({
