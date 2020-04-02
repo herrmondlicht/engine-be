@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export default () => ({
   login: (req, res) => {
@@ -6,8 +6,8 @@ export default () => ({
     if (response) return res.status(200).json(response);
     return res
       .status(401)
-      .json({ status: 401, errorText: "Invalid username or password" });
-  }
+      .json({ status: 401, errorText: 'Invalid username or password' });
+  },
 });
 
 export const authenticateUser = ({ username, password }) => {
@@ -15,10 +15,10 @@ export const authenticateUser = ({ username, password }) => {
   if (username === USERNAME && password === PASSWORD) {
     const token = jwt.sign(
       {
-        role: "admin"
+        role: 'admin',
       },
       SECRET,
-      { expiresIn: "24h" }
+      { expiresIn: '24h' },
     );
     return { token };
   }

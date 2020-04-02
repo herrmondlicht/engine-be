@@ -1,39 +1,41 @@
-require("dotenv").config();
-import express from "express";
-import bodyParser from "body-parser";
-import appRoutes from "./index.routes";
-import cors from "cors";
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import appRoutes from './index.routes';
+
+require('dotenv').config();
+
 const { PORT } = process.env;
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json({ limit: "1mb" }));
+app.use(bodyParser.json({ limit: '1mb' }));
 app.use(
   bodyParser.urlencoded({
-    extended: true
-  })
+    extended: true,
+  }),
 );
 
-//load routes
-app.use("/api", appRoutes);
+// load routes
+app.use('/api', appRoutes);
 
-app.get("/", (req, res) => res.send({ api: "OK" }));
+app.get('/', (req, res) => res.send({ api: 'OK' }));
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({
       status: 401,
-      message: "Invalid token"
+      message: 'Invalid token',
     });
   }
 });
 
-app.use(function errorHandler(err, req, res, next) {
+app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({
     status: 500,
-    message: "something went wrong"
+    message: 'something went wrong',
   });
 });
 
