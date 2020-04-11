@@ -257,6 +257,58 @@ Holds information about the customer
             }
         }
         
+## Customer [/customers/{id}]
+
+### Get Customer By Id [GET]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the customer.
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+               "id":1, 
+                "document_number": 45612312390, 
+                "fullname": "John Dias", 
+                "address": "45, Merchant Street, Valletta", 
+                "phone": "192381714474", 
+                "date_of_birth": "1990-02-15", 
+                "created_at": "2020-02-15T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+        
+### Update a Customer [PUT]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the customer.
+
++ Attributes (object)
+    + document_number: 12312332190 (number) - Document Number from the customer 
+    + fullname: John Fernando (string, required) - Customer's name
+    + address: 799 R. Augusto Bordin, Gramado (string) - Customer's address
+    + phone: 282331239 (string) - Customer's phone number
+    + email: john.fernando@email.com (string) - Customer's email
+    + date_of_birth: 1990-08-19 (string) - Customer's Birth Date
+
++ Response 200 (application/json)
+
+        {
+            "updated": true,
+            "data": {
+               "id":1, 
+                "document_number": 45612312390, 
+                "fullname": "John Dias", 
+                "address": "45, Merchant Street, Valletta", 
+                "phone": "192381714474", 
+                "date_of_birth": "1990-02-15", 
+                "created_at": "2020-02-15T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+
+        
 ## Customer Cars Collection [/customers/{id}/cars]
 
 + Parameters
@@ -264,10 +316,8 @@ Holds information about the customer
 
 ### List All Customers cars [GET]
 
-This example below would be using the `include` query parameter
+This example would be using the `include` query parameter
 
-
-    
 + Response 200 (application/json)
 
         {
@@ -342,6 +392,65 @@ This example below would be using the `include` query parameter
 
         {
             "created": true,
+            "data": {
+                "id":1, 
+                "license_plate": "ABC1236", 
+                "car_id": 6, 
+                "customer_id": 1, 
+                "displacement": "1.0", 
+                "color": "Brown", 
+                "created_at": "2020-01-18T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+        
+## Customer Car [/customers/{id}/cars/{customer_car_id}]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the customer.
+
+### Get Customer Car [GET]
+This example would be using the `include` query parameter
+
++ Parameters
+    + customer_car_id: 1 (number) - An unique identifier of the customer car.
+    
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "id":1, 
+                "license_plate": "ABC1234", 
+                "car_id": 1, 
+                "customer_id": 1, 
+                "displacement": "1.0", 
+                "color": "Black", 
+                "created_at": "2020-01-18T20:43:46.000Z",
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "car": {
+                    "id": 1,
+                    "model": "Gol",
+                    "make": "VW",
+                    "manufacture_year": 2010,
+                    "created_at": "2020-02-15T20:43:46.000Z",
+                    "updated_at": "2020-02-22T20:12:39.000Z"
+                }
+            }
+        }
+        
+### Update a Customer Car [PUT]
+
++ Attributes (object)
+    + license_plate: ABC1234 (string, required) - Customer car's license plates 
+    + car_id: 1 (number, required) - Customer's pre-registered generic car id (lookup cars above)
+    + customer_id: 1 (number, required) - Customer id (lookup customers above)
+    + displacement: "1.0" (string, required) - Displacement of the car eg: "1.0" "1.6"
+    + color: "Black" (string, required) - Customer Car's color
+
++ Response 200 (application/json)
+
+        {
+            "updated": true,
             "data": {
                 "id":1, 
                 "license_plate": "ABC1236", 
