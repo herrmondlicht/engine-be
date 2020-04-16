@@ -7,6 +7,8 @@ create table customers(
 	document_number INT(10) DEFAULT NULL,
 	fullname VARCHAR(50),
     address VARCHAR(100),
+    email VARCHAR(50),
+    phone VARCHAR(50),
 	date_of_birth DATE DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
@@ -14,18 +16,14 @@ create table customers(
 
 create table cars(
 	id INT(10) not null auto_increment primary key,
-    model VARCHAR(10),
-    make VARCHAR(10),
-    manufacture_year INT(4),
+    model VARCHAR(50),
+    make VARCHAR(50),
+    manufacture_year INT(4) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
 );
 
 ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year);
-ALTER TABLE `engine`.`cars` 
-CHANGE COLUMN `model` `model` VARCHAR(10) NOT NULL ,
-CHANGE COLUMN `make` `make` VARCHAR(10) NOT NULL ,
-CHANGE COLUMN `manufacture_year` `manufacture_year` INT(4) NOT NULL ;
 
 create table customer_cars(
 	id INT(10) not null auto_increment primary key,
