@@ -1,18 +1,7 @@
 import mysql from 'mysql';
+import dbCredentials from '../constants/sqlCredentials';
 
-require('dotenv').config();
-
-const { DB_PASSWORD, DB_HOST } = process.env;
-
-export const DATABASE_CONFIG = {
-  host: DB_HOST,
-  password: DB_PASSWORD,
-  database: 'engine',
-  user: 'root',
-  port: 3307,
-};
-
-function connectToDB(dbconfig = DATABASE_CONFIG) {
+function connectToDB(dbconfig = dbCredentials.DATABASE_CONFIG) {
   const connection = mysql.createConnection({
     ...dbconfig,
     multipleStatements: true,
