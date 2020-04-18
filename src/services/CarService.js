@@ -1,13 +1,12 @@
 import queryHelperService from './queryHelperService';
 import MySqlService from './mysqlService';
 
-export default ({ queryService = queryHelperService(), mysqlService = MySqlService() } = {}) => {
-  const getList = async ({ fields, limit, query } = {}) => {
+export default ({ queryService = queryHelperService(), mysqlService = MySqlService(), connection = mysqlService.connectToDB() } = {}) => ({
+  getList: async ({ fields, limit, query } = {}) => {
     const carList = await queryService.getFrom('cars', { fields, limit, query });
     return carList;
-  };
-
-  const addCar = async (data, { connection = mysqlService.connectToDB() } = {}) => {
+  },
+  addCar: async (data) => {
     await mysqlService.querySQLWithConnection(connection)(
       `
         INSERT INTO cars SET ?
@@ -18,10 +17,5 @@ export default ({ queryService = queryHelperService(), mysqlService = MySqlServi
     );
     const selectFromInsert = await queryService.getFrom('cars', { query: data });
     return selectFromInsert;
-  };
-
-  return {
-    getList,
-    addCar,
-  };
-};
+  },
+});
