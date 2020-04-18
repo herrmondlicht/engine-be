@@ -2,9 +2,9 @@ const faker = require('faker');
 
 const createRecord = (knex) => {
   return knex('cars').insert({
-    model: faker.random.word(),
-    make: faker.random.word(),
-    manufacture_year: faker.date.past().getFullYear()
+    model: faker.vehicle.model(),
+    make: faker.vehicle.manufacturer(),
+    manufacture_year: faker.date.past().getFullYear(),
   });
 };
 
@@ -14,7 +14,7 @@ exports.seed = (knex) => {
     .then(() => {
       const records = [];
 
-      for (let i = 1; i < 10; i+=1) {
+      for (let i = 0; i < 10; i += 1) {
         records.push(createRecord(knex, i));
       }
 

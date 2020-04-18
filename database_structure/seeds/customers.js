@@ -7,7 +7,7 @@ const createRecord = (knex) => {
     address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.country()}`,
     email: faker.internet.email(),
     phone: faker.phone.phoneNumber(),
-    date_of_birth: faker.date.past()
+    date_of_birth: faker.date.past(),
   });
 };
 
@@ -17,7 +17,7 @@ exports.seed = (knex) => {
     .then(() => {
       const records = [];
 
-      for (let i = 1; i < 10; i+=1) {
+      for (let i = 0; i < 10; i += 1) {
         records.push(createRecord(knex, i));
       }
 
