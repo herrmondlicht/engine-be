@@ -1,8 +1,12 @@
 import _queryBuilder from './queryBuilder';
 
-const applyWhere = (queryBuilderObject, query) => {
+const applyWhere = ( queryBuilderObject, query) => {
+  const searchDeleted = query && query.deleted_at;
+  if (!searchDeleted) {
+    queryBuilderObject.whereNull('deleted_at');
+  }
   if (query) {
-    return queryBuilderObject.where(query);
+    queryBuilderObject.where(query);
   }
   return queryBuilderObject;
 };
@@ -34,6 +38,18 @@ const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit }
   }
 };
 
+const insert = ({ queryBuilder }) => async (tableName, data) => {
+  return queryBuilder.insert(data).into(tableName);
+};
+
+const update = ({ queryBuilder }) => async (tableName, data) => {
+  const { id, ...updateData } = data;
+  await queryBuilder(tableName).where({ id }).update(updateData);
+  return { id };
+};
+
 export default ({ queryBuilder = _queryBuilder } = {}) => ({
   getFrom: getFrom({ queryBuilder }),
+  insert: insert({ queryBuilder }),
+  update: update({ queryBuilder }),
 });
