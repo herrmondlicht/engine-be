@@ -1,5 +1,7 @@
 import _mysql from 'mysql';
-import dbCredentials from '../constants/sqlCredentials';
+
+import dbCredentials from '../../constants/sqlCredentials';
+
 
 const connectToDB = ({ dbconfig = dbCredentials.DATABASE_CONFIG, mysql = _mysql } = {}) => {
   const connection = mysql.createConnection({
