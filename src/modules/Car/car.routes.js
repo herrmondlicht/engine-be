@@ -1,10 +1,10 @@
 import express from 'express';
-import CarController from './car.controller';
+import _carController from './car.controller';
 import carService from '../../services/carService';
 
 const router = express.Router();
 
-const carController = CarController({ carService: carService() });
+const carController = _carController({ carService: carService() });
 
 router.get('/', carController.list);
 router.post('/', carController.create);
