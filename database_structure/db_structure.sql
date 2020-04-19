@@ -4,14 +4,15 @@ use engine;
 
 create table customers(
 	id INT(10) not null auto_increment primary key,
-	document_number INT(10) DEFAULT NULL,
+	document_number VARCHAR(50) DEFAULT NULL,
 	fullname VARCHAR(50),
     address VARCHAR(100),
     email VARCHAR(50),
     phone VARCHAR(50),
 	date_of_birth DATE DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL
 );
 
 create table cars(
@@ -20,7 +21,8 @@ create table cars(
     make VARCHAR(50),
     manufacture_year INT(4) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL
 );
 
 ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year);
@@ -34,6 +36,7 @@ create table customer_cars(
     color VARCHAR(10),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL,
 	FOREIGN KEY (car_id) REFERENCES cars(id),
 	FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
@@ -46,6 +49,7 @@ create table service_orders(
     service_item_price DECIMAL(10,2),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL,
     FOREIGN KEY (customer_car_id) REFERENCES customer_cars(id)
 );
 
@@ -53,7 +57,8 @@ create table services(
 	id INT(10) not null auto_increment primary key,
     name VARCHAR(50),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL
 );
 
 create table service_items
@@ -63,6 +68,7 @@ create table service_items
     name VARCHAR(50),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL,
 	FOREIGN KEY (service_id) REFERENCES services(id)
 );
 
@@ -74,6 +80,7 @@ create table service_order_items(
     unit_price DECIMAL(10,2),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    deleted_at TIMESTAMP NULL,
 	FOREIGN KEY (service_order_id) REFERENCES service_orders(id),
 	FOREIGN KEY (service_item_id) REFERENCES service_items(id)
 );
