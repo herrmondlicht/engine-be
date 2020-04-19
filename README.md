@@ -6,13 +6,15 @@ Feel free to do whatever you need with it!
 
 ### starting the project on dev mode
 Make sure you have the dependencies installed: 
-- docker
-- mysql-client
-- node & npm
+- `docker`
+- `mysql-client`
+- `node & npm`
 
-##### creating the database:
+#### creating the database:
 run `npm run start-db`
 The command above will create a docker container running a mysql server with the overall structure of the database
+
+run the migrations with `npm run seed-db`
 
 #### running the project
 To run the project, copy and paste the `.env.example` to `.env` and replace the values:
