@@ -1,8 +1,8 @@
-import queryHelperService from './queryHelperService';
-import MySqlService from './mysqlService';
+import queryHelperService from './databaseService/queryHelperService';
+import MySqlService from './databaseService/mysqlService';
 
-const getList = ({ queryService }) => async ({ fields, limit, query } = {}) => {
-  const carList = await queryService.getFrom('cars', { fields, limit, query });
+const getList = ({ queryService }) => async ({ fields, limit, q } = {}) => {
+  const carList = await queryService.getFrom('cars', { fields, limit, query: q });
   return carList;
 };
 
