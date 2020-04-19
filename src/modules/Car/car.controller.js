@@ -17,7 +17,7 @@ const list = ({ carService }) => async (req, res) => {
 
 const byId = ({ carService }) => async (req, res) => {
   try {
-    const carList = await carService.getList({ query: { id: req.params.id } });
+    const carList = await carService.getList({ q: { id: req.params.id } });
     if (carList.length) {
       return res.status(200).json({
         data: carList[0],
