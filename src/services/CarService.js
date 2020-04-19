@@ -20,6 +20,6 @@ const addCar = ({ queryService, mysqlService, connection }) => async (data) => {
 };
 
 export default ({ queryService = queryHelperService(), mysqlService = MySqlService(), connection = mysqlService.connectToDB() } = {}) => ({
-  getList: getList({ queryService, mysqlService, connection }),
-  addCar: addCar({ queryService }),
+  getList: getList({ queryService }),
+  addCar: addCar({ queryService, mysqlService, connection }),
 });
