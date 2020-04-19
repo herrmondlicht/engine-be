@@ -1,16 +1,16 @@
-import mysql from 'mysql';
+import _mysql from 'mysql';
 import dbCredentials from '../constants/sqlCredentials';
 
-function connectToDB(dbconfig = dbCredentials.DATABASE_CONFIG) {
+const connectToDB = ({ dbconfig = dbCredentials.DATABASE_CONFIG, mysql = _mysql } = {}) => {
   const connection = mysql.createConnection({
     ...dbconfig,
     multipleStatements: true,
   });
   connection.connect();
   return connection;
-}
+};
 
-function connectionWithTransaction() {
+const connectionWithTransaction = () => {
   const connection = connectToDB();
   return new Promise((resolve, reject) => {
     connection.beginTransaction((err) => {
@@ -24,9 +24,9 @@ function connectionWithTransaction() {
       }
     });
   });
-}
+};
 
-function querySQLWithConnection(connection) {
+const querySQLWithConnection = (connection) => {
   return (queryString, options) =>
     new Promise((resolve, reject) => {
       try {
@@ -38,14 +38,14 @@ function querySQLWithConnection(connection) {
         reject(e);
       }
     });
-}
+};
 
-async function query(queryString, options) {
+const query = async (queryString, options) => {
   const connection = connectToDB();
   const result = await querySQLWithConnection(connection)(queryString, options);
   connection.end();
   return result;
-}
+};
 
 export default () => ({
   query,

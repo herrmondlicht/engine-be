@@ -18,7 +18,7 @@ const makeWhereQuery = (query) => {
   }
 };
 
-const getFrom = (mysqlService) => async (table, { fields, query } = {}) => {
+const getFrom = ({ mysqlService }) => async (table, { fields, query } = {}) => {
   try {
     const columns = fields ? fields.split(',') : '*';
     const whereClause = query ? makeWhereQuery(query) : '';
@@ -36,5 +36,5 @@ const getFrom = (mysqlService) => async (table, { fields, query } = {}) => {
 };
 
 export default ({ mysqlService = MySqlService() } = {}) => ({
-  getFrom: getFrom(mysqlService),
+  getFrom: getFrom({ mysqlService }),
 });
