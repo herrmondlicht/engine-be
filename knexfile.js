@@ -12,15 +12,16 @@ const commonConfig = {
   },
   migrations: {
     tableName: 'migration',
+    directory: './database_structure/migrations',
   },
 };
 
 module.exports = {
   development: {
     ...commonConfig,
-    seeds:{
-      directory:"./database_structure/seeds"
-    }
+    seeds: {
+      directory: './database_structure/seeds',
+    },
   },
 
   staging: {
