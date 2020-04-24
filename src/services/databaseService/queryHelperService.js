@@ -22,7 +22,7 @@ const applyLimit = (queryBuilderObject, limit) => {
 const applyInclude = (queryBuilderObject, { include, tableName }) => {
   if (include) {
     include.split(',').forEach((includeResource) => {
-      queryBuilderObject.join(includeResource, `${tableName}.${FK_CONSTANTS[includeResource]}`, '=', `${includeResource}.id`);
+      queryBuilderObject.join(includeResource, `${tableName}.${FK_CONSTANTS[includeResource]}`, '=', `${includeResource}.id`).options({ nestTables: true });
     });
   }
 };
@@ -36,7 +36,7 @@ const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, 
     applyLimit(builderQuery, limit);
     applyInclude(builderQuery, { include, tableName });
 
-    return builderQuery.options({ nestTables: true });
+    return builderQuery;
   } catch (e) {
     if (e.code === 'ER_BAD_FIELD_ERROR') {
       const badFieldError = new Error('field declared in query was not found');
