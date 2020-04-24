@@ -1,7 +1,7 @@
 import queryHelperService from './databaseService/queryHelperService';
 
-const getList = ({ queryService, resourceName }) => async ({ fields, limit, q } = {}) => {
-  const resourceList = await queryService.getFrom(resourceName, { fields, limit, query: q });
+const getList = ({ queryService, resourceName }) => async ({ fields, limit, q, include } = {}) => {
+  const resourceList = await queryService.getFrom(resourceName, { fields, limit, query: q, include });
   return resourceList;
 };
 
