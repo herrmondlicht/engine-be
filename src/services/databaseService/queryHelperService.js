@@ -1,9 +1,10 @@
 import _queryBuilder from './queryBuilder';
+import FK_CONSTANTS from './constants_FK';
 
-const applyWhere = ( queryBuilderObject, query) => {
+const applyWhere = (queryBuilderObject, query, resource) => {
   const searchDeleted = query && query.deleted_at;
   if (!searchDeleted) {
-    queryBuilderObject.whereNull('deleted_at');
+    queryBuilderObject.whereNull(`${resource}.deleted_at`);
   }
   if (query) {
     queryBuilderObject.where(query);
@@ -18,15 +19,24 @@ const applyLimit = (queryBuilderObject, limit) => {
   return queryBuilderObject;
 };
 
-const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit } = {}) => {
+const applyInclude = (queryBuilderObject, { include, tableName }) => {
+  if (include) {
+    include.split(',').forEach((includeResource) => {
+      queryBuilderObject.join(includeResource, `${tableName}.${FK_CONSTANTS[includeResource]}`, '=', `${includeResource}.id`);
+    });
+  }
+};
+
+const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include } = {}) => {
   try {
     const columns = fields ? fields.split(',') : '*';
     const JSONQuery = typeof query === 'string' ? JSON.parse(query) : query;
     const builderQuery = queryBuilder.from(tableName).select(columns);
-    applyWhere(builderQuery, JSONQuery);
+    applyWhere(builderQuery, JSONQuery, tableName);
     applyLimit(builderQuery, limit);
+    applyInclude(builderQuery, { include, tableName });
 
-    return builderQuery;
+    return builderQuery.options({ nestTables: true });
   } catch (e) {
     if (e.code === 'ER_BAD_FIELD_ERROR') {
       const badFieldError = new Error('field declared in query was not found');
