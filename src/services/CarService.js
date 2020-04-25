@@ -1,6 +1,6 @@
 import queryHelperService from './databaseService/queryHelperService';
 import MySqlService from './databaseService/mysqlService';
-import commonService from './commonService';
+import _commonService from './commonService';
 
 const addCar = ({ queryService, mysqlService, connection }) => async (data) => {
   await mysqlService.querySQLWithConnection(connection)(
@@ -15,7 +15,12 @@ const addCar = ({ queryService, mysqlService, connection }) => async (data) => {
   return selectFromInsert;
 };
 
-export default ({ queryService = queryHelperService(), mysqlService = MySqlService(), connection = mysqlService.connectToDB() } = {}) => ({
-  ...commonService({ queryService, resourceName: 'cars' }),
+export default ({
+  queryService = queryHelperService(),
+  mysqlService = MySqlService(),
+  connection = mysqlService.connectToDB(),
+  commonService = _commonService({ queryService, resourceName: 'cars' }),
+} = {}) => ({
+  ...commonService,
   insert: addCar({ queryService, mysqlService, connection }),
 });

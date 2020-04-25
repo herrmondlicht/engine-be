@@ -5,6 +5,7 @@ const createRecord = (knex) => {
     model: faker.vehicle.model(),
     make: faker.vehicle.manufacturer(),
     manufacture_year: faker.date.past().getFullYear(),
+    fuel: faker.vehicle.fuel().toLowerCase(),
   });
 };
 
