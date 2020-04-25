@@ -1,5 +1,5 @@
-import commonService from './commonService';
+import _commonService from './commonService';
 
-export default () => ({
-  ...commonService({ resourceName: 'customers' }),
+export default ({ commonService = _commonService({ resourceName: 'customers' }) } = {}) => ({
+  ...commonService,
 });
