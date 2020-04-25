@@ -20,12 +20,13 @@ create table cars(
     model VARCHAR(50),
     make VARCHAR(50),
     manufacture_year INT(4) NOT NULL,
+    fuel VARCHAR(50),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     deleted_at TIMESTAMP NULL
 );
 
-ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year);
+ALTER TABLE cars ADD UNIQUE idx_row_unique(model, make, manufacture_year, fuel);
 
 create table customer_cars(
 	id INT(10) not null auto_increment primary key,
@@ -33,7 +34,7 @@ create table customer_cars(
 	car_id INT(10) not null,
     customer_id INT(10) not null,
     displacement VARCHAR(3),
-    color VARCHAR(10),
+    color VARCHAR(50),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     deleted_at TIMESTAMP NULL,
