@@ -1,5 +1,5 @@
-import commonControllerMethods from '../Common/common.controller';
+import _commonControllerMethods from '../Common/common.controller';
 
-export default ({ customerCarService }) => ({
-  ...commonControllerMethods({ resourceService: customerCarService }),
+export default ({ customerCarService, commonControllerMethods = _commonControllerMethods({ resourceService: customerCarService }) } = {}) => ({
+  ...commonControllerMethods,
 });

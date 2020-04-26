@@ -8,12 +8,12 @@ API for the Engine backend.
 ### For all get endpoints
 - simple queries can be done using the `q` query parameter, as in `/resource?q={}`
 - limit can be done using the `limit` query parameter, as in `/resource?limit=10` where 10 would be the number you would like to limit by
-- simple inner joining can be done using the `include` query parameter, as in `/resource?include="cars,customers"`. The names must be separated by comma
-- you can select the fields you'd like to bring with the `fields` query parameter, as in `resource?fields="id,name"`. The names must be separated by comma
+- simple inner joining can be done using the `include` query parameter, as in `/resource?include=cars,customers`. The names must be separated by comma
+- you can select the fields you'd like to bring with the `fields` query parameter, as in `resource?fields=id,name`. The names must be separated by comma
 
 # Group Session
 
-Holds generic information about cars.
+Handles the user's sessions.
 
 ## Authenticate User [/session/login]
 
@@ -323,57 +323,73 @@ This example would be using the `include` query parameter
         {
             "data": [
                 {
-                    "id":1, 
-                    "license_plate": "ABC1234", 
-                    "car_id": 1, 
-                    "customer_id": 1, 
-                    "displacement": "1.0", 
-                    "color": "Black", 
-                    "created_at": "2020-01-18T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z",
-                    "car": {
+                    "customer_cars": {
                         "id": 1,
-                        "model": "Gol",
-                        "make": "VW",
-                        "manufacture_year": 2010,
-                        "created_at": "2020-02-15T20:43:46.000Z",
-                        "updated_at": "2020-02-22T20:12:39.000Z"
+                        "license_plate": "TEC8906",
+                        "car_id": 10,
+                        "customer_id": 1,
+                        "displacement": "6.0",
+                        "color": "tan",
+                        "created_at": "2020-04-25T15:47:06.000Z",
+                        "updated_at": "2020-04-25T15:47:06.000Z",
+                        "deleted_at": null
+                    },
+                    "cars": {
+                        "id": 10,
+                        "model": "Alpine",
+                        "make": "Cadillac",
+                        "manufacture_year": 2019,
+                        "fuel": "Electric",
+                        "created_at": "2020-04-25T15:47:06.000Z",
+                        "updated_at": "2020-04-25T15:47:06.000Z",
+                        "deleted_at": null
+                    },
+                    "customers": {
+                        "id": 1,
+                        "document_number": "86462",
+                        "fullname": "Julio Farrell",
+                        "address": "938 Robyn Plains North Manuela Taiwan",
+                        "email": "Niko.Gutmann@gmail.com",
+                        "phone": "(947) 217-1926 x835",
+                        "date_of_birth": "2019-08-25T22:00:00.000Z",
+                        "created_at": "2020-04-25T15:47:06.000Z",
+                        "updated_at": "2020-04-25T15:47:06.000Z",
+                        "deleted_at": null
                     }
                 },
                 {
-                    "id":2, 
-                    "license_plate": "ABC1235", 
-                    "car_id": 2, 
-                    "customer_id": 1, 
-                    "displacement": "1.5", 
-                    "color": "Yellow", 
-                    "created_at": "2020-01-18T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z",
-                        "car": {
-                        "id": 2,
-                        "model": "Polo",
-                        "make": "VW",
-                        "manufacture_year": 2015,
-                        "created_at": "2020-02-22T20:12:39.000Z",
-                        "updated_at": "2020-02-22T20:12:39.000Z"
-                    }
-                },
-                {
-                    "id":1, 
-                    "license_plate": "ABC1236", 
-                    "car_id": 6, 
-                    "customer_id": 1, 
-                    "displacement": "1.0", 
-                    "color": "Brown", 
-                    "created_at": "2020-01-18T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z",
-                    "car": {
-                        "id": 6,
-                        "model": "i30",
-                        "make": "Hyundai",
-                        "manufacture_year": 2014,
-                        "created_at": "2020-02-25T20:20:33.000Z",
-                        "updated_at": "2020-02-25T20:20:33.000Z"
+                    "customer_cars": {
+                        "id": 15,
+                        "license_plate": "FIF1234",
+                        "car_id": 1,
+                        "customer_id": 1,
+                        "displacement": "6.0",
+                        "color": "tan",
+                        "created_at": "2020-04-26T21:16:51.000Z",
+                        "updated_at": "2020-04-26T21:16:51.000Z",
+                        "deleted_at": null
+                    },
+                    "cars": {
+                        "id": 1,
+                        "model": "Prius",
+                        "make": "Cadillac",
+                        "manufacture_year": 2019,
+                        "fuel": "Diesel",
+                        "created_at": "2020-04-25T15:47:06.000Z",
+                        "updated_at": "2020-04-25T15:47:06.000Z",
+                        "deleted_at": null
+                    },
+                    "customers": {
+                        "id": 1,
+                        "document_number": "86462",
+                        "fullname": "Julio Farrell",
+                        "address": "938 Robyn Plains North Manuela Taiwan",
+                        "email": "Niko.Gutmann@gmail.com",
+                        "phone": "(947) 217-1926 x835",
+                        "date_of_birth": "2019-08-25T22:00:00.000Z",
+                        "created_at": "2020-04-25T15:47:06.000Z",
+                        "updated_at": "2020-04-25T15:47:06.000Z",
+                        "deleted_at": null
                     }
                 }
             ]
@@ -419,21 +435,38 @@ This example would be using the `include` query parameter
 
         {
             "data": {
-                "id":1, 
-                "license_plate": "ABC1234", 
-                "car_id": 1, 
-                "customer_id": 1, 
-                "displacement": "1.0", 
-                "color": "Black", 
-                "created_at": "2020-01-18T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z",
-                "car": {
+                "customer_cars": {
                     "id": 1,
-                    "model": "Gol",
-                    "make": "VW",
-                    "manufacture_year": 2010,
-                    "created_at": "2020-02-15T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "license_plate": "TEC8906",
+                    "car_id": 10,
+                    "customer_id": 1,
+                    "displacement": "6.0",
+                    "color": "tan",
+                    "created_at": "2020-04-25T15:47:06.000Z",
+                    "updated_at": "2020-04-25T15:47:06.000Z",
+                    "deleted_at": null
+                },
+                "cars": {
+                    "id": 10,
+                    "model": "Alpine",
+                    "make": "Cadillac",
+                    "manufacture_year": 2019,
+                    "fuel": "Electric",
+                    "created_at": "2020-04-25T15:47:06.000Z",
+                    "updated_at": "2020-04-25T15:47:06.000Z",
+                    "deleted_at": null
+                },
+                "customers": {
+                    "id": 1,
+                    "document_number": "86462",
+                    "fullname": "Julio Farrell",
+                    "address": "938 Robyn Plains North Manuela Taiwan",
+                    "email": "Niko.Gutmann@gmail.com",
+                    "phone": "(947) 217-1926 x835",
+                    "date_of_birth": "2019-08-25T22:00:00.000Z",
+                    "created_at": "2020-04-25T15:47:06.000Z",
+                    "updated_at": "2020-04-25T15:47:06.000Z",
+                    "deleted_at": null
                 }
             }
         }

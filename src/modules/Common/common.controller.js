@@ -6,7 +6,7 @@ export const respondError = (res, e) =>
 
 const list = ({ resourceService }) => async (req, res) => {
   try {
-    const resourceList = await resourceService.getList({ ...req.query });
+    const resourceList = await resourceService.getList({ ...req.query, injectedQuery: req.injectedQuery });
     return res.status(200).json({
       data: resourceList,
     });
@@ -17,7 +17,7 @@ const list = ({ resourceService }) => async (req, res) => {
 
 const byId = ({ resourceService }) => async (req, res) => {
   try {
-    const resourceList = await resourceService.getList({ q: { id: req.params.id } });
+    const resourceList = await resourceService.getList({ ...req.query, q: { id: req.params.id, ...req.injectedQuery } });
     if (resourceList.length) {
       return res.status(200).json({
         data: resourceList[0],
