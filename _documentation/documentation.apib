@@ -49,79 +49,98 @@ Holds generic information about cars.
                     "make": "VW",
                     "manufacture_year": 2010,
                     "created_at": "2020-02-15T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 2,
                     "model": "Polo",
                     "make": "VW",
+                    "fuel": "gasoline",
                     "manufacture_year": 2015,
                     "created_at": "2020-02-22T20:12:39.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 6,
                     "model": "i30",
                     "make": "Hyundai",
+                    "fuel": "gasoline",
                     "manufacture_year": 2014,
                     "created_at": "2020-02-25T20:20:33.000Z",
-                    "updated_at": "2020-02-25T20:20:33.000Z"
+                    "updated_at": "2020-02-25T20:20:33.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 12,
                     "model": "i30",
                     "make": "Hyundai",
+                    "fuel": "gasoline",
                     "manufacture_year": 2015,
                     "created_at": "2020-02-25T20:28:55.000Z",
-                    "updated_at": "2020-02-25T20:28:55.000Z"
+                    "updated_at": "2020-02-25T20:28:55.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 34,
                     "model": "i30",
                     "make": "Hyundai",
+                    "fuel": "gasoline",
                     "manufacture_year": 2013,
                     "created_at": "2020-02-25T21:34:34.000Z",
-                    "updated_at": "2020-02-25T21:34:34.000Z"
+                    "updated_at": "2020-02-25T21:34:34.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 46,
                     "model": "i3",
                     "make": "BMW",
+                    "fuel": "gasoline",
                     "manufacture_year": 2018,
                     "created_at": "2020-02-25T21:49:13.000Z",
-                    "updated_at": "2020-02-25T21:49:13.000Z"
+                    "updated_at": "2020-02-25T21:49:13.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 48,
                     "model": "i3",
                     "make": "BMW",
+                    "fuel": "gasoline",
                     "manufacture_year": 2019,
                     "created_at": "2020-02-25T21:49:23.000Z",
-                    "updated_at": "2020-02-25T21:49:23.000Z"
+                    "updated_at": "2020-02-25T21:49:23.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 56,
                     "model": "Golf",
                     "make": "VW",
+                    "fuel": "gasoline",
                     "manufacture_year": 2010,
                     "created_at": "2020-02-25T23:08:42.000Z",
-                    "updated_at": "2020-02-25T23:08:42.000Z"
+                    "updated_at": "2020-02-25T23:08:42.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 58,
                     "model": "C3",
                     "make": "Citroen",
+                    "fuel": "gasoline",
                     "manufacture_year": 2010,
                     "created_at": "2020-02-29T16:00:32.000Z",
-                    "updated_at": "2020-02-29T16:00:32.000Z"
+                    "updated_at": "2020-02-29T16:00:32.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id": 64,
                     "model": "i30",
                     "make": "Hyundai",
+                    "fuel": "gasoline",
                     "manufacture_year": 2010,
                     "created_at": "2020-03-01T19:17:26.000Z",
-                    "updated_at": "2020-03-01T19:17:26.000Z"
+                    "updated_at": "2020-03-01T19:17:26.000Z",
+                    "deleted_at":null
                 }
             ]
         }
@@ -130,6 +149,7 @@ Holds generic information about cars.
 
 + Attributes (object)
     + make: BMW (string, required) - Name of manufacturer
+    + fuel: gasoline (string, required) - Fuel of Car,
     + model: i3 (string, required) - Name of the car
     + manufacture_year: 2010 (number, required) - Year the car was manufactured
 
@@ -141,9 +161,11 @@ Holds generic information about cars.
                 "id": 48,
                 "model": "i3",
                 "make": "BMW",
+                "fuel": "gasoline",
                 "manufacture_year": 2019,
                 "created_at": "2020-02-25T21:49:23.000Z",
-                "updated_at": "2020-02-25T21:49:23.000Z"
+                "updated_at": "2020-02-25T21:49:23.000Z",
+                "deleted_at":null
             }
         }
 
@@ -161,9 +183,11 @@ Holds generic information about cars.
                 "id": 1,
                 "model": "Gol",
                 "make": "VW",
+                "fuel": "gasoline",
                 "manufacture_year": 2010,
                 "created_at": "2020-02-15T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z"
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "deleted_at":null
             }
         }
 
@@ -187,7 +211,8 @@ Holds information about the customer
                     "phone": "192381714474", 
                     "date_of_birth": "1990-02-15", 
                     "created_at": "2020-02-15T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id":2, 
@@ -197,17 +222,19 @@ Holds information about the customer
                     "phone": "95279921", 
                     "date_of_birth": "1980-05-25", 
                     "created_at": "2020-01-16T20:43:46.000Z",
-                    "updated_at": "2020-03-23T20:12:39.000Z"
+                    "updated_at": "2020-03-23T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
-                    "id":3 
+                    "id":3,
                     "document_number": 32132132145, 
                     "fullname": "Pedro de Alcântra", 
                     "address": "1923, Estrada das Taipas, São Paulo", 
                     "phone": "95844823", 
                     "date_of_birth": "1995-20-15", 
                     "created_at": "2020-01-17T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id":4, 
@@ -217,7 +244,8 @@ Holds information about the customer
                     "phone": "1923744955", 
                     "date_of_birth": "1991-03-15", 
                     "created_at": "2020-01-18T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 },
                 {
                     "id":5, 
@@ -227,7 +255,8 @@ Holds information about the customer
                     "phone": null, 
                     "date_of_birth": "1990-08-19", 
                     "created_at": "2020-01-19T20:43:46.000Z",
-                    "updated_at": "2020-02-22T20:12:39.000Z"
+                    "updated_at": "2020-02-22T20:12:39.000Z",
+                    "deleted_at":null
                 }
             ]
         }
@@ -253,7 +282,8 @@ Holds information about the customer
                 "address": "237, Via degli Angeli, Roma", 
                 "date_of_birth": "1991-03-15", 
                 "created_at": "2020-01-18T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z"
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "deleted_at":null
             }
         }
         
@@ -275,7 +305,8 @@ Holds information about the customer
                 "phone": "192381714474", 
                 "date_of_birth": "1990-02-15", 
                 "created_at": "2020-02-15T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z"
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "deleted_at":null
             }
         }
         
@@ -304,7 +335,8 @@ Holds information about the customer
                 "phone": "192381714474", 
                 "date_of_birth": "1990-02-15", 
                 "created_at": "2020-02-15T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z"
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "deleted_at":null
             }
         }
 
@@ -416,7 +448,8 @@ This example would be using the `include` query parameter
                 "displacement": "1.0", 
                 "color": "Brown", 
                 "created_at": "2020-01-18T20:43:46.000Z",
-                "updated_at": "2020-02-22T20:12:39.000Z"
+                "updated_at": "2020-02-22T20:12:39.000Z",
+                "deleted_at":null
             }
         }
         
@@ -424,12 +457,11 @@ This example would be using the `include` query parameter
 
 + Parameters
     + id: 1 (number) - An unique identifier of the customer.
+    + customer_car_id: 1 (number) - An unique identifier of the customer car.
 
 ### Get Customer Car [GET]
-This example would be using the `include` query parameter
 
-+ Parameters
-    + customer_car_id: 1 (number) - An unique identifier of the customer car.
+This example would be using the `include` query parameter
     
 + Response 200 (application/json)
 
@@ -493,5 +525,266 @@ This example would be using the `include` query parameter
                 "color": "Brown", 
                 "created_at": "2020-01-18T20:43:46.000Z",
                 "updated_at": "2020-02-22T20:12:39.000Z"
+            }
+        }
+        
+# Group Service Orders
+
+Holds information about the service orders
+
+## Service Orders collection [/service_orders]
+
+### List All Service Orders [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                  "id": 1,
+                  "customer_car_id": 1,
+                  "service_items_price": 100,
+                  "service_price": 250.75,
+                  "order_status": "in_progress",
+                  "created_at": "2020-01-16T20:43:46.000Z",
+                  "updated_at": "2020-03-23T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 2,
+                  "customer_car_id": 1,
+                  "service_items_price": 180,
+                  "service_price": 100.75,
+                  "order_status": "waiting_payment",
+                  "created_at": "2020-01-16T20:43:46.000Z",
+                  "updated_at": "2020-03-23T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 3,
+                  "customer_car_id": 2,
+                  "service_items_price": 200,
+                  "service_price": 10.9,
+                  "order_status": "canceled",
+                  "created_at": "2020-01-17T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 4,
+                  "customer_car_id": 3,
+                  "service_items_price": 200,
+                  "service_price": 10.9,
+                  "order_status": "draft",
+                  "created_at": "2020-01-17T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 5,
+                  "customer_car_id": 3,
+                  "service_items_price": 15,
+                  "service_price": 10.9,
+                  "order_status": "in_progress",
+                  "created_at": "2020-01-17T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 6,
+                  "customer_car_id": 3,
+                  "service_items_price": 15,
+                  "service_price": 10.9,
+                  "order_status": "paid",
+                  "created_at": "2020-01-17T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 7,
+                  "customer_car_id": 5,
+                  "service_items_price": 150,
+                  "service_price": 10.9,
+                  "order_status": "paid",
+                  "created_at": "2020-01-18T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": null
+                },
+                {
+                  "id": 8,
+                  "customer_car_id": 5,
+                  "service_items_price": 150,
+                  "service_price": 10.9,
+                  "order_status": "draft",
+                  "created_at": "2020-01-18T20:43:46.000Z",
+                  "updated_at": "2020-02-22T20:12:39.000Z",
+                  "deleted_at": "2020-02-22T20:15:39.000Z"
+                }
+            ]
+        }
+
+        
+### Insert New Service [POST]
+
++ Attributes (object)
+    + customer_car_id: 1 (number) - Customer car ID 
+    + service_items_price: 240.00 (number) - Price of the service items as in car parts
+    + service_price: 120.00 (number) - Price of service execution
+
++ Response 200 (application/json)
+
+        {
+            "created": true,
+            "data": {
+                    "id": 10,
+                    "customer_car_id": 1,
+                    "service_items_price": 100,
+                    "service_price": 250.75,
+                    "order_status": "in_progress",
+                    "created_at": "2020-01-16T20:43:46.000Z",
+                    "updated_at": "2020-03-23T20:12:39.000Z",
+                    "deleted_at": null
+            }
+        }
+        
+## Service Order [/service_orders/{id}]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the service order.
+
+### Get Service Order By Id [GET]
+
++ Response 200 (application/json)
+
+        {
+           "data": {
+                "id": 10,
+                "customer_car_id": 1,
+                "service_items_price": 100,
+                "service_price": 250.75,
+                "order_status": "in_progress",
+                "created_at": "2020-01-16T20:43:46.000Z",
+                "updated_at": "2020-03-23T20:12:39.000Z",
+                "deleted_at": null
+            }
+        }
+        
+### Update a Service Order [PATCH]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the service order.
+
++ Attributes (object)
+    + customer_car_id: 1 (number) - Customer car ID 
+    + service_items_price: 240.00 (number) - Price of the service items as in car parts
+    + service_price: 120.00 (number) - Price of service execution
+    + `order_status`: in_progress (string) - Service order status, which can be chosen between in_progress canceled waiting_payment paid draft
+
++ Response 200 (application/json)
+
+        {
+            "updated": true,
+            "data": {
+                "id": 1,
+                "customer_car_id": 1,
+                "service_items_price": 240.00,
+                "service_price": 120.00,
+                "order_status": "in_progress",
+                "created_at": "2020-01-16T20:43:46.000Z",
+                "updated_at": "2020-03-23T20:12:39.000Z",
+                "deleted_at": null
+            }
+        }
+
+        
+## Service Items Collection [/service_orders/{id}/items]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the service order.
+
+### List All Services Items [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                 {
+                      "id": 1,
+                      "service_order_id": 1,
+                      "service_type_id": null,
+                      "quantity": 1,
+                      "unit_price": 10,
+                      "description": "Carburador",
+                      "created_at": "2020-01-16T20:43:46.000Z",
+                      "updated_at": "2020-03-23T20:12:39.000Z",
+                      "deleted_at": null
+                    },
+                    {
+                      "id": 2,
+                      "service_order_id": 1,
+                      "service_type_id": null,
+                      "quantity": 4,
+                      "unit_price": 200,
+                      "description": "Molas",
+                      "created_at": "2020-01-16T20:43:46.000Z",
+                      "updated_at": "2020-03-23T20:12:39.000Z",
+                      "deleted_at": null
+                    }
+            ]
+        }
+        
+### Insert New Service Item [POST]
+
++ Attributes (object)
+    + service_type_id: 1 (number) - Service type of the service item
+    + quantity: 1 (number, required) - quantity of the item
+    + unit_price: 25.00 (number) - Unit price of the service item
+    + description: "Carburador" (string, required) - Description of the service item
+
++ Response 200 (application/json)
+
+        {
+            "created": true,
+            "data": {
+                 "id": 10,
+                  "service_order_id": 1,
+                  "service_type_id": null,
+                  "quantity": 1,
+                  "unit_price": 10,
+                  "description": "Carburador",
+                  "created_at": "2020-01-16T20:43:46.000Z",
+                  "updated_at": "2020-03-23T20:12:39.000Z",
+                  "deleted_at": null
+            }
+        }
+        
+## Service Item [/service_orders/{id}/items/{service_item_id}]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the service order.
+    + service_item_id: 5 (number) - An unique identifier of the service item.
+        
+### Update Service Item [PATCH]
+
++ Attributes (object)
+    + service_type_id: 1 (number) - Service type of the service item
+    + quantity: 1 (number, required) - quantity of the item
+    + unit_price: 25.00 (number) - Unit price of the service item
+    + description: "Carburador" (string, required) - Description of the service item
+
++ Response 200 (application/json)
+
+        {
+            "created": updated,
+            "data": {
+                 "id": 5,
+                  "service_order_id": 1,
+                  "service_type_id": null,
+                  "quantity": 1,
+                  "unit_price": 10,
+                  "description": "Carburador",
+                  "created_at": "2020-01-16T20:43:46.000Z",
+                  "updated_at": "2020-03-23T20:12:39.000Z",
+                  "deleted_at": null
             }
         }

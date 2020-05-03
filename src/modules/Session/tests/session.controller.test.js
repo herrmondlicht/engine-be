@@ -12,8 +12,11 @@ describe('session controller', () => {
   it('null/undefined return of authenticateUser when wrong params are passed', () => {
     const username = 'random123';
     const password = 'random1234';
-
-    const response = sessionControllerTest.authenticateUser({ username, password });
-    expect(response).toBe(undefined);
+    try{
+      sessionControllerTest.authenticateUser({ username, password });
+    }
+    catch(e){
+      expect(e.toString()).toBe("Error: Wrong username/password")
+    }
   });
 });
