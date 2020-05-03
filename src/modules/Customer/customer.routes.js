@@ -15,6 +15,6 @@ router.patch('/:id', customerController.update);
 router.get('/:id', customerController.byId);
 router.delete('/:id', customerController.delete);
 
-router.use('/:id/cars', bindResourcesToRoute(['cars', 'customers'], 'customer_id'), customerCarRoutes);
+router.use('/:id/cars', bindResourcesToRoute('customer_id'), customerCarRoutes);
 
 export default router;
