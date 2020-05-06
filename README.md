@@ -4,6 +4,8 @@ Backend for Engine project
 This project is a personal one, designed to solve a specific problem for a friend :)
 Feel free to do whatever you need with it!
 
+Documentation: https://enginebe.docs.apiary.io/#
+
 ### starting the project on dev mode
 Make sure you have the dependencies installed: 
 - `docker`
