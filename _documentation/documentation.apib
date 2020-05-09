@@ -527,7 +527,174 @@ This example would be using the `include` query parameter
                 "updated_at": "2020-02-22T20:12:39.000Z"
             }
         }
+
+
+
+# Group Customer Car
+
+Holds information about the customer cars resource
+
+## Customer Cars collection [/customer_cars]
+
+### Get Customer Cars [GET]
+
++ Resonse 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "customer_cars": {
+                        "id": 1,
+                        "license_plate": "COP1775",
+                        "car_id": 3,
+                        "customer_id": 1,
+                        "displacement": "2.7",
+                        "color": "teal",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "customers": {
+                        "id": 1,
+                        "document_number": "77656",
+                        "fullname": "Hipolito Kautzer",
+                        "address": "66658 D'Amore Centers Dessieport Saudi Arabia",
+                        "email": "Jorge.Hirthe69@yahoo.com",
+                        "phone": "257-528-7884",
+                        "date_of_birth": "2020-04-03T22:00:00.000Z",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "cars": {
+                        "id": 3,
+                        "model": "911",
+                        "make": "Jeep",
+                        "manufacture_year": 2020,
+                        "fuel": "hybrid",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    }
+                },
+                {
+                    "customer_cars": {
+                        "id": 2,
+                        "license_plate": "MAR9565",
+                        "car_id": 8,
+                        "customer_id": 2,
+                        "displacement": "3.4",
+                        "color": "ivory",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "customers": {
+                        "id": 2,
+                        "document_number": "71740",
+                        "fullname": "Felipa Kilback",
+                        "address": "31811 McDermott Squares East Josephineburgh Bouvet Island (Bouvetoya)",
+                        "email": "Dorian_Daugherty@gmail.com",
+                        "phone": "378.272.8604 x07141",
+                        "date_of_birth": "2019-05-15T22:00:00.000Z",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "cars": {
+                        "id": 8,
+                        "model": "Altima",
+                        "make": "Toyota",
+                        "manufacture_year": 2020,
+                        "fuel": "electric",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    }
+                },
+                {
+                    "customer_cars": {
+                        "id": 3,
+                        "license_plate": "SAV3323",
+                        "car_id": 5,
+                        "customer_id": 3,
+                        "displacement": "9.6",
+                        "color": "gold",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "customers": {
+                        "id": 3,
+                        "document_number": "82124",
+                        "fullname": "Aubree Fahey",
+                        "address": "11983 Vergie Alley Lanceville Turks and Caicos Islands",
+                        "email": "Bonnie41@hotmail.com",
+                        "phone": "591-257-0064 x98553",
+                        "date_of_birth": "2019-11-13T23:00:00.000Z",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    },
+                    "cars": {
+                        "id": 5,
+                        "model": "Charger",
+                        "make": "Rolls Royce",
+                        "manufacture_year": 2019,
+                        "fuel": "gasoline",
+                        "created_at": "2020-05-09T10:17:51.000Z",
+                        "updated_at": "2020-05-09T10:17:51.000Z",
+                        "deleted_at": null
+                    }
+                }
+            ]
+        }
         
+
+## Customer Car [/customer_cars/{customer_car_id}]
+
+### Get Customer Car [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "customer_cars": {
+                    "id": 1,
+                    "license_plate": "COP1775",
+                    "car_id": 3,
+                    "customer_id": 1,
+                    "displacement": "2.7",
+                    "color": "teal",
+                    "created_at": "2020-05-09T10:17:51.000Z",
+                    "updated_at": "2020-05-09T10:17:51.000Z",
+                    "deleted_at": null
+                },
+                "customers": {
+                    "id": 1,
+                    "document_number": "77656",
+                    "fullname": "Hipolito Kautzer",
+                    "address": "66658 D'Amore Centers Dessieport Saudi Arabia",
+                    "email": "Jorge.Hirthe69@yahoo.com",
+                    "phone": "257-528-7884",
+                    "date_of_birth": "2020-04-03T22:00:00.000Z",
+                    "created_at": "2020-05-09T10:17:51.000Z",
+                    "updated_at": "2020-05-09T10:17:51.000Z",
+                    "deleted_at": null
+                },
+                "cars": {
+                    "id": 3,
+                    "model": "911",
+                    "make": "Jeep",
+                    "manufacture_year": 2020,
+                    "fuel": "hybrid",
+                    "created_at": "2020-05-09T10:17:51.000Z",
+                    "updated_at": "2020-05-09T10:17:51.000Z",
+                    "deleted_at": null
+                }
+            }
+        }
+
 # Group Service Orders
 
 Holds information about the service orders
@@ -758,7 +925,7 @@ Holds information about the service orders
             }
         }
         
-## Service Item [/service_orders/{id}/items/{service_item_id}]
+## Service Item Resource [/service_orders/{id}/items/{service_item_id}]
 
 + Parameters
     + id: 1 (number) - An unique identifier of the service order.
