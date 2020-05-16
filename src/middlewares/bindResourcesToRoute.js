@@ -1,6 +1,6 @@
-const bindResourcesToRoute = (rootResourceIdKey) => (req, res, next) => {
-  req.injectedQuery = {
-    ...req.injectedQuery,
+const bindResourcesToRoute = (rootResourceIdKey, { cleanPreviousResources = false } = {}) => (req, res, next) => {
+  req.resourcesJoinIds = {
+    ...(!cleanPreviousResources && req.resourcesJoinIds),
     [rootResourceIdKey]: req.params.id,
   };
   next();
