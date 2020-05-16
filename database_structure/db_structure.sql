@@ -49,6 +49,8 @@ create table service_orders(
     order_status ENUM("in_progress", "canceled", "waiting_payment", "paid", "draft") NOT NULL DEFAULT "in_progress",
     service_price DECIMAL(10,2),
     service_items_price DECIMAL(10,2),
+    discount_price DECIMAL(10,2),
+    observations TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     deleted_at TIMESTAMP NULL,
@@ -65,11 +67,11 @@ create table service_types(
 
 create table service_order_items(
 	id INT(20) NOT NULL auto_increment primary key,
-    description VARCHAR(50) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     service_order_id INT(20),
     service_type_id INT(10),
-    quantity INT(4) NOT NULL,
-    unit_price DECIMAL(10,2),
+    quantity INT(4) NOT NULL DEFAULT 0,
+    unit_price DECIMAL(10,2) NOT NULL DEFAULT 0.0,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
     deleted_at TIMESTAMP NULL,

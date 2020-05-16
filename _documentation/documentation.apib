@@ -715,7 +715,9 @@ Holds information about the service orders
                   "customer_car_id": 1,
                   "service_items_price": 100,
                   "service_price": 250.75,
+                  "discount_price": 10.00
                   "order_status": "in_progress",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-16T20:43:46.000Z",
                   "updated_at": "2020-03-23T20:12:39.000Z",
                   "deleted_at": null
@@ -725,7 +727,9 @@ Holds information about the service orders
                   "customer_car_id": 1,
                   "service_items_price": 180,
                   "service_price": 100.75,
+                  "discount_price": 10.00
                   "order_status": "waiting_payment",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-16T20:43:46.000Z",
                   "updated_at": "2020-03-23T20:12:39.000Z",
                   "deleted_at": null
@@ -735,7 +739,9 @@ Holds information about the service orders
                   "customer_car_id": 2,
                   "service_items_price": 200,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "canceled",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-17T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": null
@@ -745,7 +751,9 @@ Holds information about the service orders
                   "customer_car_id": 3,
                   "service_items_price": 200,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "draft",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-17T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": null
@@ -755,7 +763,9 @@ Holds information about the service orders
                   "customer_car_id": 3,
                   "service_items_price": 15,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "in_progress",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-17T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": null
@@ -765,7 +775,9 @@ Holds information about the service orders
                   "customer_car_id": 3,
                   "service_items_price": 15,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "paid",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-17T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": null
@@ -775,7 +787,9 @@ Holds information about the service orders
                   "customer_car_id": 5,
                   "service_items_price": 150,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "paid",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-18T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": null
@@ -785,7 +799,9 @@ Holds information about the service orders
                   "customer_car_id": 5,
                   "service_items_price": 150,
                   "service_price": 10.9,
+                  "discount_price": 10.00
                   "order_status": "draft",
+                  "observations: "Some random observation"
                   "created_at": "2020-01-18T20:43:46.000Z",
                   "updated_at": "2020-02-22T20:12:39.000Z",
                   "deleted_at": "2020-02-22T20:15:39.000Z"
@@ -797,9 +813,11 @@ Holds information about the service orders
 ### Insert New Service [POST]
 
 + Attributes (object)
-    + customer_car_id: 1 (number) - Customer car ID 
+    + customer_car_id: 1 (number, required) - Customer car ID 
     + service_items_price: 240.00 (number) - Price of the service items as in car parts
     + service_price: 120.00 (number) - Price of service execution
+    + discount_price: 2.00 (number) - Price of service discount
+    + observations: Some random observation (string) - Service observations and considerations
 
 + Response 200 (application/json)
 
@@ -810,7 +828,9 @@ Holds information about the service orders
                     "customer_car_id": 1,
                     "service_items_price": 100,
                     "service_price": 250.75,
+                    "discount_price": 10.00
                     "order_status": "in_progress",
+                    "observations: "Some random observation"
                     "created_at": "2020-01-16T20:43:46.000Z",
                     "updated_at": "2020-03-23T20:12:39.000Z",
                     "deleted_at": null
@@ -832,7 +852,9 @@ Holds information about the service orders
                 "customer_car_id": 1,
                 "service_items_price": 100,
                 "service_price": 250.75,
+                "discount_price": 10.00
                 "order_status": "in_progress",
+                "observations: "Some random observation"
                 "created_at": "2020-01-16T20:43:46.000Z",
                 "updated_at": "2020-03-23T20:12:39.000Z",
                 "deleted_at": null
@@ -859,7 +881,9 @@ Holds information about the service orders
                 "customer_car_id": 1,
                 "service_items_price": 240.00,
                 "service_price": 120.00,
+                "discount_price": 10.00
                 "order_status": "in_progress",
+                "observations: "Some random observation"
                 "created_at": "2020-01-16T20:43:46.000Z",
                 "updated_at": "2020-03-23T20:12:39.000Z",
                 "deleted_at": null
