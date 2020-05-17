@@ -40,12 +40,12 @@ const applyInclude = (queryBuilderObject, { include, tableName }) => {
   }
 };
 
-const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include, injectedQuery } = {}) => {
+const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include, resourcesJoinIds } = {}) => {
   try {
     const columns = fields ? fields.split(',') : '*';
     const JSONQuery = typeof query === 'string' ? JSON.parse(query) : query;
     const builderQuery = queryBuilder.from(tableName).select(columns);
-    applyWhere(builderQuery, { ...JSONQuery, ...injectedQuery }, tableName);
+    applyWhere(builderQuery, { ...JSONQuery, ...resourcesJoinIds }, tableName);
     applyLimit(builderQuery, limit);
     applyInclude(builderQuery, { include, tableName });
 
