@@ -67,7 +67,7 @@ create table service_types(
 
 create table service_order_items(
 	id INT(20) NOT NULL auto_increment primary key,
-    description VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
     service_order_id INT(20),
     service_type_id INT(10),
     quantity INT(4) NOT NULL DEFAULT 0,

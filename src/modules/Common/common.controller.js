@@ -33,8 +33,8 @@ const byId = ({ resourceService }) => async (req, res) => {
 
 const create = ({ resourceService }) => async (req, res) => {
   try {
-    const { body } = req;
-    const resource = await resourceService.insert(body);
+    const { body, resourcesJoinIds } = req;
+    const resource = await resourceService.insert({ ...body, ...resourcesJoinIds });
     return res.status(200).json({
       created: true,
       data: resource,
