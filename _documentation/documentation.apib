@@ -191,6 +191,19 @@ Holds generic information about cars.
             }
         }
 
+### Delete Car [DELETE]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the car.
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                "id": 1,
+            }
+        }
+
 # Group Customer
 
 Holds information about the customer
@@ -307,6 +320,19 @@ Holds information about the customer
                 "created_at": "2020-02-15T20:43:46.000Z",
                 "updated_at": "2020-02-22T20:12:39.000Z",
                 "deleted_at":null
+            }
+        }
+
+### Delete Customer [DELETE]
+
++ Parameters
+    + id: 1 (number) - An unique identifier of the customer.
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+               "id":1, 
             }
         }
         
@@ -860,6 +886,16 @@ Holds information about the service orders
                 "deleted_at": null
             }
         }
+
+### Delete Service Order [DELETE]
+
++ Response 200 (application/json)
+
+        {
+           "data": {
+                "id": 10,
+            }
+        }
         
 ### Update a Service Order [PATCH]
 
@@ -980,5 +1016,33 @@ Holds information about the service orders
                   "created_at": "2020-01-16T20:43:46.000Z",
                   "updated_at": "2020-03-23T20:12:39.000Z",
                   "deleted_at": null
+            }
+        }
+
+### Get Service Order Item By Id [GET]
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+                 "id": 5,
+                  "service_order_id": 1,
+                  "service_type_id": null,
+                  "quantity": 1,
+                  "unit_price": 10,
+                  "description": "Carburador",
+                  "created_at": "2020-01-16T20:43:46.000Z",
+                  "updated_at": "2020-03-23T20:12:39.000Z",
+                  "deleted_at": null
+            }
+        }
+
+### Delete Service Order [DELETE]
+
++ Response 200 (application/json)
+
+        {
+           "data": {
+                "id": 10,
             }
         }
