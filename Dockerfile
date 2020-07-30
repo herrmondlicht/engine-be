@@ -12,10 +12,10 @@ RUN npm install --production
 
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN rm .env
 
-RUN npm run migration
+RUN npm run build
 
 EXPOSE 4040
 
-CMD [ "node", "build/index.js" ]
+CMD [ "npm", "start" ]
