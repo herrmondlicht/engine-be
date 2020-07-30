@@ -14,6 +14,8 @@ COPY --chown=node:node . .
 
 RUN npm run build
 
+RUN npm run migration
+
 EXPOSE 4040
 
 CMD [ "node", "build/index.js" ]
