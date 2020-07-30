@@ -12,9 +12,9 @@ const { SECRET } = process.env;
 const router = express.Router();
 
 router.use('/session', loginRouter);
-router.use('/cars', jwt({ secret: SECRET }), carRouter);
-router.use('/customers', jwt({ secret: SECRET }), customerRoutes);
-router.use('/customer_cars', jwt({ secret: SECRET }), customerCarRoutes);
-router.use('/service_orders', jwt({ secret: SECRET }), serviceOrderRoutes);
+router.use('/cars', jwt({ secret: SECRET, algorithms: ['HS256'] }), carRouter);
+router.use('/customers', jwt({ secret: SECRET, algorithms: ['HS256'] }), customerRoutes);
+router.use('/customer_cars', jwt({ secret: SECRET, algorithms: ['HS256'] }), customerCarRoutes);
+router.use('/service_orders', jwt({ secret: SECRET, algorithms: ['HS256'] }), serviceOrderRoutes);
 
 export default router;
