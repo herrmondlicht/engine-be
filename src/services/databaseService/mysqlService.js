@@ -3,11 +3,8 @@ import _mysql from 'mysql';
 import dbCredentials from '../../constants/sqlCredentials';
 
 
-const connectToDB = ({ dbconfig = dbCredentials.DATABASE_CONFIG, mysql = _mysql } = {}) => {
-  const connection = mysql.createConnection({
-    ...dbconfig,
-    multipleStatements: true,
-  });
+const connectToDB = ({ dbURL = dbCredentials.DATABASE_URL, mysql = _mysql } = {}) => {
+  const connection = mysql.createConnection(dbURL);
   connection.connect();
   return connection;
 };
