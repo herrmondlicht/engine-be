@@ -5,7 +5,7 @@ import appRoutes from './index.routes';
 
 require('dotenv').config();
 
-const { PORT } = process.env;
+const { API_PORT } = process.env;
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.use((err, req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(API_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`App is now running on port ${PORT}`);
+  console.log(`App is now running on port ${API_PORT}`);
 });
