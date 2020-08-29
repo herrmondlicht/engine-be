@@ -12,8 +12,6 @@ RUN npm install --production
 
 COPY --chown=node:node . .
 
-RUN rm .env
-
 RUN npm run build
 
 EXPOSE 4040
