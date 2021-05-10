@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 export const authenticateUser = ({ username, password }) => {
-  const { USERNAME, PASSWORD, SECRET } = process.env;
-  if (username === USERNAME && password === PASSWORD) {
+  const { PORTAL_USERNAME, PORTAL_PASSWORD, SECRET } = process.env;
+  if (username === PORTAL_USERNAME && password === PORTAL_PASSWORD) {
     const token = jwt.sign(
       {
         role: 'admin',
