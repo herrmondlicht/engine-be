@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const createRecord = (knex) => {
   return knex('customers').insert({
-    document_number: faker.random.number(),
+    document_number: faker.datatype.number(),
     fullname: `${faker.name.firstName()} ${faker.name.lastName()}`,
     address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.country()}`,
     email: faker.internet.email(),
