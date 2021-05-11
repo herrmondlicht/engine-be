@@ -1,21 +1,19 @@
-export const respondError = (res, e) =>
-  res.status(500).json({
-    status: 500,
-    message: e.message || 'something went wrong',
-  });
+export const respondError = (next, e) => {
+  next(e);
+};
 
-const list = ({ resourceService }) => async (req, res) => {
+const list = ({ resourceService }) => async (req, res, next) => {
   try {
     const resourceList = await resourceService.getList({ ...req.query, resourcesJoinIds: req.resourcesJoinIds });
     return res.status(200).json({
       data: resourceList,
     });
   } catch (e) {
-    return respondError(res, e);
+    return respondError(next, e);
   }
 };
 
-const byId = ({ resourceService }) => async (req, res) => {
+const byId = ({ resourceService }) => async (req, res, next) => {
   try {
     const resourceList = await resourceService.getList({ ...req.query, q: { id: req.params.id, ...req.resourcesJoinIds } });
     if (resourceList.length) {
@@ -27,11 +25,11 @@ const byId = ({ resourceService }) => async (req, res) => {
       message: 'resource was not found',
     });
   } catch (e) {
-    return respondError(res, e);
+    return respondError(next, e);
   }
 };
 
-const create = ({ resourceService }) => async (req, res) => {
+const create = ({ resourceService }) => async (req, res, next) => {
   try {
     const { body, resourcesJoinIds } = req;
     const resource = await resourceService.insert({ ...body, ...resourcesJoinIds });
@@ -40,11 +38,11 @@ const create = ({ resourceService }) => async (req, res) => {
       data: resource,
     });
   } catch (e) {
-    return respondError(res, e);
+    return respondError(next, e);
   }
 };
 
-const update = ({ resourceService }) => async (req, res) => {
+const update = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
       body: { id, ...bodyToUpdate },
@@ -56,11 +54,11 @@ const update = ({ resourceService }) => async (req, res) => {
       data: resource,
     });
   } catch (e) {
-    return respondError(res, e);
+    return respondError(next, e);
   }
 };
 
-const deleteResource = ({ resourceService }) => async (req, res) => {
+const deleteResource = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
       params: { id: updateId },
@@ -71,7 +69,7 @@ const deleteResource = ({ resourceService }) => async (req, res) => {
       data: resource,
     });
   } catch (e) {
-    return respondError(res, e);
+    return respondError(next, e);
   }
 };
 
