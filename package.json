@@ -10,7 +10,7 @@
     "test": "jest --watchAll",
     "set-db": "bash ./database_structure/docker-creation.sh",
     "reset-db": "docker rm -f engine-mysql && bash ./database_structure/docker-creation.sh",
-    "db-seed": "knex seed:run --specific=index.js",
+    "seed-db": "knex seed:run --specific=index.js",
     "migration": "npx knex migrate:latest"
   },
   "jest": {
