@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.table('service_orders', (table) => {
-    table.text('odometer_reading');
+    table.string('odometer_reading', 30);
   });
 };
 
