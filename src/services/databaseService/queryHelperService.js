@@ -8,7 +8,7 @@ const insert = ({ queryBuilder }) => async (tableName, data) => {
 const update = ({ queryBuilder }) => async (tableName, data) => {
   const { id, ...updateData } = data;
   await queryBuilder(tableName).where({ id }).update(updateData);
-  return { id };
+  return { ...updateData, id };
 };
 
 export default ({ queryBuilder = _queryBuilder, whereQueryHelper = _whereQueryHelper({ queryBuilder }) } = {}) => ({
