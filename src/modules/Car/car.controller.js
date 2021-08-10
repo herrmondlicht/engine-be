@@ -1,17 +1,12 @@
-import commonControllerMethods from '../Common/common.controller';
-
-export const respondError = (res, e) =>
-  res.status(500).json({
-    status: 500,
-    message: e.message || 'something went wrong',
-  });
+import commonControllerMethods, { respondError } from '../Common/common.controller';
 
 export default ({ carService }) => ({
   ...commonControllerMethods({ resourceService: carService }),
   create: async (req, res) => {
     try {
       const { body } = req;
-      const car = await carService.insert(body);
+      const { updated_at, created_at, ...payload } = body;
+      const car = await carService.insert(payload);
       return res.status(200).json({
         created: true,
         data: car[0],

@@ -31,8 +31,11 @@ const byId = ({ resourceService }) => async (req, res, next) => {
 
 const create = ({ resourceService }) => async (req, res, next) => {
   try {
-    const { body, resourcesJoinIds } = req;
-    const resource = await resourceService.insert({ ...body, ...resourcesJoinIds });
+    const {
+      body: { created_at, updated_at, ...payload },
+      resourcesJoinIds,
+    } = req;
+    const resource = await resourceService.insert({ ...payload, ...resourcesJoinIds });
     return res.status(200).json({
       created: true,
       data: resource,
@@ -45,7 +48,7 @@ const create = ({ resourceService }) => async (req, res, next) => {
 const update = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
-      body: { id, ...bodyToUpdate },
+      body: { id, created_at, updated_at, ...bodyToUpdate },
       params: { id: updateId },
     } = req;
     const resource = await resourceService.update(updateId, bodyToUpdate);
