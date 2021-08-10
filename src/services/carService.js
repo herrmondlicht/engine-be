@@ -2,7 +2,7 @@ import queryHelperService from './databaseService/queryHelperService';
 import MySqlService from './databaseService/mysqlService';
 import _commonService from './commonService';
 
-const addCar = ({ queryService, mysqlService, connection }) => async (data) => {
+const addCar = ({ queryService, mysqlService, connection }) => async ({ created_at, updated_at, ...data }) => {
   await mysqlService.querySQLWithConnection(connection)(
     `
       INSERT INTO cars SET ?

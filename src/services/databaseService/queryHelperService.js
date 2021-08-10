@@ -1,7 +1,7 @@
 import _queryBuilder from './queryBuilder';
 import _whereQueryHelper from './whereQueryHelperService';
 
-const insert = ({ queryBuilder }) => async (tableName, data) => {
+const insert = ({ queryBuilder }) => async (tableName, { created_at, updated_at, ...data }) => {
   return queryBuilder.insert(data).into(tableName);
 };
 
