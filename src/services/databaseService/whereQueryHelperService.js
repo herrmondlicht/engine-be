@@ -44,7 +44,7 @@ const getFields = (fields) => (fields ? fields.split(',') : '*');
 
 const parseQueryToJSON = (query) => (typeof query === 'string' ? JSON.parse(query) : query);
 
-const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include, resourcesJoinIds } = {}) => {
+const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include, resourcesJoinIds, customQueryBuilderOperation } = {}) => {
   try {
     const columns = getFields(fields);
     const JSONQuery = parseQueryToJSON(query);
@@ -52,6 +52,9 @@ const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, 
     applyWhere(builderQuery, { ...JSONQuery, ...resourcesJoinIds }, tableName);
     applyLimit(builderQuery, limit);
     applyInclude(builderQuery, { include, tableName });
+    if (customQueryBuilderOperation) {
+      customQueryBuilderOperation(builderQuery);
+    }
 
     return builderQuery;
   } catch (e) {
