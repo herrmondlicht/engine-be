@@ -44,7 +44,7 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.14",
+    "knex": "^0.95.11",
     "mysql": "^2.18.1",
     "regenerator-runtime": "^0.13.5"
   },
