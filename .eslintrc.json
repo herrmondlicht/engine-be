@@ -1,7 +1,8 @@
 {
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "es2021": true
   },
   "extends": ["airbnb-base", "prettier"],
   "globals": {
@@ -9,7 +10,7 @@
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "ignorePatterns": ["temp.js", "node_modules/", "**/*.test.js"],
