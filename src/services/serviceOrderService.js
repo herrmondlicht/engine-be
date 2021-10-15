@@ -3,25 +3,26 @@ import _commonService from './commonService';
 import _queryService from './databaseService/whereQueryHelperService';
 import queryBuilder from './databaseService/queryBuilder';
 
-const sumServiceItems = (builderQuery) => {
-  builderQuery
-    .join('service_order_items', 'service_orders.id', '=', `service_order_items.${FK_CONSTANTS.service_orders}`)
-    .sum({
-      service_items_price: queryBuilder.raw('?? ?? ??', ['service_order_items.unit_price', '*', 'service_order_items.quantity']),
-    })
-    .whereNull('service_order_items.deleted_at');
-};
-
 export default ({ commonService = _commonService({ resourceName: 'service_orders' }), queryService = _queryService({ queryBuilder }) } = {}) => ({
   ...commonService,
   getList: async ({ limit, q, include, resourcesJoinIds } = {}) => {
+    const includeSelect =
+      include
+        ?.split(',')
+        ?.map((includeItem) => `${includeItem}.*`)
+        ?.join(',') || '';
     const resourceList = queryService.getFrom('service_orders', {
-      fields: 'service_orders.*',
+      fields: [
+        queryBuilder.raw('*'),
+        queryBuilder.raw(
+          '(select SUM(unit_price *  quantity) from service_order_items where service_order_id=service_orders.id and deleted_at is null) as service_items_price'
+        ),
+        ...(includeSelect ? [queryBuilder.raw(includeSelect)] : []),
+      ],
       limit,
       query: q,
       include,
       resourcesJoinIds,
-      customQueryBuilderOperation: sumServiceItems,
     });
     return resourceList;
   },
