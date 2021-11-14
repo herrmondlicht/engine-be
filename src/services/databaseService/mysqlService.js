@@ -2,10 +2,26 @@ import _mysql from 'mysql';
 
 import dbCredentials from '../../constants/sqlCredentials';
 
-
 const connectToDB = ({ dbURL = dbCredentials.DATABASE_URL, mysql = _mysql } = {}) => {
   const connection = mysql.createConnection(dbURL);
   connection.connect();
+
+  connection.on('connection', () => {
+    console.log('database connected');
+  });
+
+  connection.on('error', function (err) {
+    console.log('db error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNREFUSED') {
+      console.error('lost connection, trying again in 5 seconds');
+      setTimeout(() => {
+        connectToDB(dbURL, mysql);
+      }, 5000);
+    } else {
+      throw err;
+    }
+  });
+
   return connection;
 };
 
