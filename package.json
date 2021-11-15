@@ -6,7 +6,7 @@
   "scripts": {
     "start-dev": "nodemon --exec babel-node src/index.js",
     "start": "node build/index.js",
-    "build": "rm -rf ./build && ./node_modules/.bin/babel src -d build",
+    "build": "npm run migration && rm -rf ./build && ./node_modules/.bin/babel src -d build",
     "test": "jest --watchAll",
     "set-db": "bash ./database_structure/docker-creation.sh",
     "reset-db": "docker rm -f engine-mysql && bash ./database_structure/docker-creation.sh",
