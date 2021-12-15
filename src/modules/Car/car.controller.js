@@ -12,6 +12,7 @@ export default ({ carService }) => ({
         data: car[0],
       });
     } catch (e) {
+      console.error(e);
       return respondError(res, e);
     }
   },
