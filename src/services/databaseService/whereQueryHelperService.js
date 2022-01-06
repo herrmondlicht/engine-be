@@ -14,15 +14,18 @@ const addResourcePrefixToKeys = (query, resource) => {
 };
 
 const applyWhere = (queryBuilderObject, query, resource) => {
-  const searchDeleted = query && query.deleted_at;
-  if (!searchDeleted) {
-    queryBuilderObject.whereNull(`${resource}.deleted_at`);
-  }
   if (query) {
     const resourcedPrefixedQuery = addResourcePrefixToKeys(query, resource);
     queryBuilderObject.where(resourcedPrefixedQuery);
   }
   return queryBuilderObject;
+};
+
+const applyDeletedAtLogic = (queryBuilderObject, query, resource) => {
+  const searchDeleted = query?.deleted_at || query?.searchDeletedRecords;
+  if (!searchDeleted) {
+    queryBuilderObject.whereNull(`${resource}.deleted_at`);
+  }
 };
 
 const applyLimit = (queryBuilderObject, limit) => {
@@ -44,12 +47,16 @@ const getFields = (fields) => (fields ? fields : ['*']);
 
 const parseQueryToJSON = (query) => (typeof query === 'string' ? JSON.parse(query) : query);
 
-const getFrom = ({ queryBuilder }) => async (tableName, { fields, query, limit, include, resourcesJoinIds, customQueryBuilderOperation } = {}) => {
+const getFrom = ({ queryBuilder }) => async (
+  tableName,
+  { fields, query, limit, include, resourcesJoinIds, searchDeletedRecords, customQueryBuilderOperation } = {}
+) => {
   try {
     const columns = getFields(fields);
     const JSONQuery = parseQueryToJSON(query);
     const builderQuery = queryBuilder.from(tableName).select(...columns);
     applyWhere(builderQuery, { ...JSONQuery, ...resourcesJoinIds }, tableName);
+    applyDeletedAtLogic(builderQuery, { ...JSONQuery, searchDeletedRecords }, tableName);
     applyLimit(builderQuery, limit);
     applyInclude(builderQuery, { include, tableName });
     if (customQueryBuilderOperation) {

@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import appRoutes from './index.routes';
 
@@ -15,6 +16,7 @@ app.use(
     extended: true,
   })
 );
+app.use(express.static(path.join(__dirname, 'public')));
 
 // load routes
 app.use('/api', appRoutes);
