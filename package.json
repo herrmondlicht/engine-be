@@ -2,6 +2,9 @@
   "name": "engine-be",
   "version": "1.0.0",
   "description": "Backend for Engine project",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "index.js",
   "scripts": {
     "start-dev": "nodemon --exec babel-node src/index.js",
