@@ -2,7 +2,7 @@ export const respondError = (next, e) => {
   next(e);
 };
 
-const list = ({ resourceService }) => async (req, res, next) => {
+const makeList = ({ resourceService }) => async (req, res, next) => {
   try {
     const resourceList = await resourceService.getList({ ...req.query, resourcesJoinIds: req.resourcesJoinIds });
     return res.status(200).json({
@@ -13,7 +13,7 @@ const list = ({ resourceService }) => async (req, res, next) => {
   }
 };
 
-const byId = ({ resourceService }) => async (req, res, next) => {
+const makeGetById = ({ resourceService }) => async (req, res, next) => {
   try {
     const resourceList = await resourceService.getList({ ...req.query, q: { id: req.params.id, ...req.resourcesJoinIds } });
     if (resourceList.length) {
@@ -29,7 +29,7 @@ const byId = ({ resourceService }) => async (req, res, next) => {
   }
 };
 
-const create = ({ resourceService }) => async (req, res, next) => {
+const makeCreate = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
       body: { created_at, updated_at, ...payload },
@@ -45,7 +45,7 @@ const create = ({ resourceService }) => async (req, res, next) => {
   }
 };
 
-const update = ({ resourceService }) => async (req, res, next) => {
+const makeUpdateMethod = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
       body: { id, created_at, updated_at, ...bodyToUpdate },
@@ -61,7 +61,7 @@ const update = ({ resourceService }) => async (req, res, next) => {
   }
 };
 
-const deleteResource = ({ resourceService }) => async (req, res, next) => {
+const makeDeleteResource = ({ resourceService }) => async (req, res, next) => {
   try {
     const {
       params: { id: updateId },
@@ -77,9 +77,9 @@ const deleteResource = ({ resourceService }) => async (req, res, next) => {
 };
 
 export default ({ resourceService }) => ({
-  list: list({ resourceService }),
-  byId: byId({ resourceService }),
-  create: create({ resourceService }),
-  update: update({ resourceService }),
-  delete: deleteResource({ resourceService }),
+  list: makeList({ resourceService }),
+  byId: makeGetById({ resourceService }),
+  create: makeCreate({ resourceService }),
+  update: makeUpdateMethod({ resourceService }),
+  delete: makeDeleteResource({ resourceService }),
 });

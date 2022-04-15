@@ -12,7 +12,7 @@ describe('session controller', () => {
     const password = 'password';
 
     const response = sessionControllerTest.authenticateUser(dependency)({ username, password });
-    console.log(response);
+
     expect(response).not.toBe(undefined);
     expect(Object.keys(response)).toContain('token');
   });
