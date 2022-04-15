@@ -1,4 +1,3 @@
-import FK_CONSTANTS from './databaseService/constants_FK';
 import _commonService from './commonService';
 import _queryService from './databaseService/whereQueryHelperService';
 import queryBuilder from './databaseService/queryBuilder';
