@@ -1,5 +1,5 @@
-import _commonControllerMethods from '../Common/common.controller';
+import _CRUDControllerMethods from '../Common/common.controller';
 
-export default ({ serviceOrderItemService, commonControllerMethods = _commonControllerMethods({ resourceService: serviceOrderItemService }) } = {}) => ({
-  ...commonControllerMethods,
+export default ({ serviceOrderItemService, CRUDControllerMethods = _CRUDControllerMethods({ resourceService: serviceOrderItemService }) } = {}) => ({
+  ...CRUDControllerMethods,
 });
