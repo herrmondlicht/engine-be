@@ -6,27 +6,32 @@ import path from 'path';
 
 import makeServiceOrderPdfController from './serviceOrderPdf.controller';
 import makeServiceOrderService from '../../services/serviceOrderService';
-import makeServiceOrderItemsService from '../../services/serviceOrderItemService';
 import makeCustomerCarService from '../../services/customerCarService';
+import { queryService } from '../../services/databaseService/queryService';
+import queryBuilder from '../../services/databaseService/dbOperations/queryBuilder';
 
 import { makeGetPrintableData } from './services/serviceOrderPDFService';
 import { makeGetPDFStream } from '../../services/pdfGenerator/pdfGenerator';
+import makeCRUDService from '../../services/makeCRUDService';
 
 const router = express.Router();
 
 // Set dependencies for controller
 const getPDFStream = makeGetPDFStream({ StreamReader: Readable, htmlRenderer: ejs, pdfGenerator: html_to_pdf, resolvePath: path.resolve });
+const customerCarCRUDService = makeCRUDService({ queryService, resourceName: 'customer_cars' });
+const serviceOrdersCRUDService = makeCRUDService({ queryService, resourceName: 'service_orders' });
+const serviceOrderItemsCRUDService = makeCRUDService({ queryService, resourceName: 'service_order_items' });
 
 const getPrintableData = makeGetPrintableData({
-  customerCarService: makeCustomerCarService(),
-  serviceOrderItemsService: makeServiceOrderItemsService(),
+  customerCarService: makeCustomerCarService({ CRUDService: customerCarCRUDService }),
+  serviceOrderItemsService: serviceOrderItemsCRUDService,
 });
 
 // Set controller for route
 const serviceOrderPDFController = makeServiceOrderPdfController({
   getPrintableData,
   getPDFStream,
-  serviceOrderService: makeServiceOrderService(),
+  serviceOrderService: makeServiceOrderService({ commonService: serviceOrdersCRUDService, queryBuilder, queryService }),
   resolvePath: path.resolve,
 });
 

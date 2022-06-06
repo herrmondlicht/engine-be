@@ -1,8 +1,4 @@
-import _commonService from './commonService';
-import _queryService from './databaseService/whereQueryHelperService';
-import queryBuilder from './databaseService/queryBuilder';
-
-export default ({ commonService = _commonService({ resourceName: 'service_orders' }), queryService = _queryService({ queryBuilder }) } = {}) => ({
+export default ({ commonService, queryService, queryBuilder } = {}) => ({
   ...commonService,
   getList: async ({ limit, q, include, resourcesJoinIds } = {}) => {
     const includeSelect =
