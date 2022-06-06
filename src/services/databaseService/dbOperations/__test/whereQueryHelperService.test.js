@@ -6,7 +6,7 @@ import {
   applyInclude,
   makeApplyInclude,
   makeGetFrom,
-} from '../whereQueryHelperService';
+} from '../makeQueryWhereService';
 import sinon from 'sinon';
 
 describe('Where query helper service', () => {

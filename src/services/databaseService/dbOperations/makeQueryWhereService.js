@@ -77,7 +77,3 @@ export const makeGetFrom =
       }
     }
   };
-
-export default ({ queryBuilder, applyWhere, applyInclude }) => ({
-  getFrom: makeGetFrom({ queryBuilder, applyWhere, applyInclude }),
-});
