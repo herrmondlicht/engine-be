@@ -1,13 +1,17 @@
 import express from 'express';
 
-import _customerController from './customer.controller';
-import customerService from '../../services/customerService';
+import makeCustomerController from './customer.controller';
+import makeCRUDControllerMethods from '../Common/common.controller';
+import makeCRUDService from '../../services/makeCRUDService';
 import customerCarRoutes from '../CustomerCar/customer_car.routes';
 import bindResourcesToRoute from '../../middlewares/bindResourcesToRoute';
+import { queryService } from '../../services/databaseService/queryService';
 
 const router = express.Router();
 
-const customerController = _customerController({ customerService: customerService() });
+const CRUDService = makeCRUDService({ queryService, resourceName: 'customers' });
+const CRUDControllerMethods = makeCRUDControllerMethods({ resourceService: CRUDService });
+const customerController = makeCustomerController({ CRUDControllerMethods });
 
 router.get('/', customerController.list);
 router.post('/', customerController.create);

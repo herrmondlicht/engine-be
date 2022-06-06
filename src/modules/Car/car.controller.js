@@ -1,7 +1,5 @@
-import commonControllerMethods, { respondError } from '../Common/common.controller';
-
-export default ({ carService }) => ({
-  ...commonControllerMethods({ resourceService: carService }),
+export default ({ carService, CRUDControllerMethods, respondError }) => ({
+  ...CRUDControllerMethods,
   create: async (req, res) => {
     try {
       const { body } = req;
