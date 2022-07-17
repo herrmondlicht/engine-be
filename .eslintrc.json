@@ -17,6 +17,7 @@
     "import/prefer-default-export": 0,
     "consistent-return": 0,
     "camelcase": 0,
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-shadow": 0
   }
 }

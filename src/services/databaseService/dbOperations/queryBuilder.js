@@ -1,6 +1,6 @@
 import knex from 'knex';
 
-import { DATABASE_URL } from '../../constants/sqlCredentials';
+import { DATABASE_URL } from '../../../constants/sqlCredentials';
 
 export default knex({
   client: 'mysql',
