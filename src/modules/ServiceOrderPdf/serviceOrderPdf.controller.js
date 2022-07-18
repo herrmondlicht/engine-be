@@ -1,15 +1,16 @@
-export default ({ getPrintableData, serviceOrderService, getPDFStream, resolvePath }) => ({
+export default ({ getSanitizedServiceOrderData, getPrintableData, serviceOrderService, getPDFStream, resolvePath }) => ({
   byId: async (req, res) => {
-    const [serviceOrderData] = await serviceOrderService.getList({
+    const [serviceOrderDataRaw] = await serviceOrderService.getList({
       limit: 1,
       q: {
         id: req.params.id,
       },
     });
 
-    if (!serviceOrderData) return res.send(404);
+    if (!serviceOrderDataRaw) return res.send(404);
 
-    const [customerCarData, serviceItems] = await getPrintableData(serviceOrderData);
+    const [customerCarData, serviceItems] = await getPrintableData(serviceOrderDataRaw);
+    const serviceOrderData = getSanitizedServiceOrderData(serviceOrderDataRaw);
     const templateURL = resolvePath(__dirname, '../../template/printTemplate.html');
 
     const printData = {
