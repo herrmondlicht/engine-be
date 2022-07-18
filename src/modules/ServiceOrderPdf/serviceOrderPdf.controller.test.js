@@ -20,6 +20,7 @@ describe('Service Order PDF Controller', () => {
 
   let dependencies = {
     getPrintableData: sinon.stub().resolves(RESPONSES.PRINTABLE_DATA),
+    getSanitizedServiceOrderData: sinon.stub().returns(RESPONSES.SERVICE_ORDER),
     getPDFStream: sinon.stub().resolves(RESPONSES.GET_PDF_STREAM),
     serviceOrderService: { getList: sinon.stub().resolves([RESPONSES.SERVICE_ORDER]) },
     resolvePath: sinon.stub().returns(RESPONSES.RESOLVE_PATH),

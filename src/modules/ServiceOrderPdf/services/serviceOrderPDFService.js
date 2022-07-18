@@ -17,3 +17,8 @@ export const makeGetPrintableData =
     const [[customerCarsData], serviceItems] = await Promise.all([customerCarDataPromise, serviceItemsPromise]);
     return [customerCarsData, serviceItems];
   };
+
+export const makeGetSanitizedServiceOrderData = () => (serviceOrderData) => ({
+  ...serviceOrderData,
+  created_at: new Date(serviceOrderData.created_at).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+});

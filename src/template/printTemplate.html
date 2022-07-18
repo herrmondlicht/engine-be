@@ -110,6 +110,7 @@
       <div style="margin-top: 10px; display: flex; align-items: center; flex-flow: column">
         <span class="text text--grey">Rua Getúlio Vargas, 304, CEP 45160-000, Belo Campo Bahia</span>
         <div class="text text--grey" style="margin-top: 5px">(77) 99982-8047 • (11) 95006-9291</div>
+        <div class="text text--grey" style="margin-top: 5px"><%=service_orders.created_at %></div>
       </div>
     </div>
     <div class="container container--bordered" style="margin-top: 10px">
@@ -122,7 +123,12 @@
           <div class="box box--field">
             <!-- CAR INFO CONTAINER -->
             <div class="container">
-              <% if(customer_cars.license_plate){ %>
+              <% if(service_orders.created_at){ %>
+              <div class="box box--field">
+                <span class="text text--grey">Data</span>
+                <span class="text"><%=service_orders.created_at%></span>
+              </div>
+              <% } %> <% if(customer_cars.license_plate){ %>
               <div class="box box--field">
                 <span class="text text--grey">Placa</span>
                 <span class="text"><%=customer_cars.license_plate%></span>

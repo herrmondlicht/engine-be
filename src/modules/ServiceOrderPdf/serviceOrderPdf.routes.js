@@ -10,7 +10,7 @@ import makeCustomerCarService from '../../services/customerCarService';
 import { queryService } from '../../services/databaseService/queryService';
 import queryBuilder from '../../services/databaseService/dbOperations/queryBuilder';
 
-import { makeGetPrintableData } from './services/serviceOrderPDFService';
+import { makeGetPrintableData, makeGetSanitizedServiceOrderData } from './services/serviceOrderPDFService';
 import { makeGetPDFStream } from '../../services/pdfGenerator/pdfGenerator';
 import makeCRUDService from '../../services/makeCRUDService';
 
@@ -27,8 +27,11 @@ const getPrintableData = makeGetPrintableData({
   serviceOrderItemsService: serviceOrderItemsCRUDService,
 });
 
+const getSanitizedServiceOrderData = makeGetSanitizedServiceOrderData();
+
 // Set controller for route
 const serviceOrderPDFController = makeServiceOrderPdfController({
+  getSanitizedServiceOrderData,
   getPrintableData,
   getPDFStream,
   serviceOrderService: makeServiceOrderService({ commonService: serviceOrdersCRUDService, queryBuilder, queryService }),
