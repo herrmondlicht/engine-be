@@ -114,7 +114,7 @@
       </div>
     </div>
     <div class="container container--bordered" style="margin-top: 10px">
-      <h3>Dados do Cliente</h3>
+      <h3>Dados do Cliente • Serviço Nº <%=service_orders.id %></h3>
       <div class="box" style="gap: 12px; margin-top: 10px">
         <div class="container">
           <div class="box">
@@ -234,11 +234,15 @@
             <span class="text text--grey">Valor da Mão de Obra:</span>
             <span class="text"><%= Number(service_orders.service_price.toString()).toLocaleString("pt-br", { style: "currency", currency: "BRL" })%></span>
           </div>
+          <div class="box box--field">
+            <span class="text text--grey">Desconto:</span>
+            <span class="text">- <%= Number(service_orders.discount_price.toString()).toLocaleString("pt-br", { style: "currency", currency: "BRL" })%></span>
+          </div>
           <div class="box box--field" style="margin-top: 10px; align-items: center">
             <span class="text text--grey">Valor Total:</span>
             <span class="text text--bold text-huge"
-              ><%=Number((service_orders.service_price + service_orders.service_items_price).toString()).toLocaleString("pt-br", { style: "currency", currency:
-              "BRL" })%></span
+              ><%=Number((service_orders.service_price + service_orders.service_items_price - service_orders.discount_price).toString()).toLocaleString("pt-br",
+              { style: "currency", currency: "BRL" })%></span
             >
           </div>
         </div>
