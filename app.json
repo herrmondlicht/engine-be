@@ -1,9 +1,4 @@
 {
-  "scripts": {
-    "dokku": {
-      "predeploy": "npm run build && npx knex migrate:latest"
-    }
-  },
   "env": {
     "PORT": 4040
   }
