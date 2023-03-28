@@ -7,7 +7,6 @@ const createRecord = (knex) => {
     address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.country()}`,
     email: faker.internet.email(),
     phone: faker.phone.phoneNumber(),
-    date_of_birth: faker.date.past(),
   });
 };
 
