@@ -1,4 +1,4 @@
-import makeServiceOrderItemsService, { makeUpdateItemsPrice } from '../serviceOrderItemsService';
+import makeServiceOrderItemsService, { makeUpdateItemsPrice } from './serviceOrderItemsService';
 
 describe('ServiceOrderItemsService', () => {
   describe('insert', () => {
