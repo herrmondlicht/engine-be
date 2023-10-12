@@ -8,7 +8,6 @@ import makeServiceOrderPdfController from './serviceOrderPdf.controller';
 import makeServiceOrderService from '../../services/serviceOrderService';
 import makeCustomerCarService from '../../services/customerCarService';
 import { queryService } from '../../services/databaseService/queryService';
-import queryBuilder from '../../services/databaseService/dbOperations/queryBuilder';
 
 import { makeGetPrintableData, makeGetSanitizedServiceOrderData } from './services/serviceOrderPDFService';
 import { makeGetPDFStream } from '../../services/pdfGenerator/pdfGenerator';
@@ -34,7 +33,7 @@ const serviceOrderPDFController = makeServiceOrderPdfController({
   getSanitizedServiceOrderData,
   getPrintableData,
   getPDFStream,
-  serviceOrderService: makeServiceOrderService({ commonService: serviceOrdersCRUDService, queryBuilder, queryService }),
+  serviceOrderService: makeServiceOrderService({ commonService: serviceOrdersCRUDService }),
   resolvePath: path.resolve,
 });
 
