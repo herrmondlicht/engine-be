@@ -1,12 +1,4 @@
-import {
-  addResourcePrefixToColumns,
-  makeApplyWhere,
-  handlesDeletedAt,
-  applyLimit,
-  applyInclude,
-  makeApplyInclude,
-  makeGetFrom,
-} from '../makeQueryWhereService';
+import { addResourcePrefixToColumns, makeApplyWhere, handlesDeletedAt, applyLimit, applyInclude, makeApplyInclude, makeGetFrom } from './makeQueryWhereService';
 import sinon from 'sinon';
 
 describe('Where query helper service', () => {
