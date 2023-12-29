@@ -12,6 +12,12 @@ const getReports =
     }
   };
 
-export default ({ serviceReportService, queryBuilder }) => ({
+const makeUpdateServiceOrder = (CRUDControllerMethods) => (req, res, next) => {
+  delete req.body.service_items_price;
+  return CRUDControllerMethods.update(req, res, next);
+};
+
+export default ({ serviceReportService, queryBuilder, CRUDControllerMethods }) => ({
   getServicePriceCalculation: getReports({ serviceReportService, queryBuilder }),
+  update: makeUpdateServiceOrder(CRUDControllerMethods),
 });

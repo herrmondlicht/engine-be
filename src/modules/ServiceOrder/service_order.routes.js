@@ -14,12 +14,12 @@ const router = express.Router();
 const CRUDService = makeCRUDService({ queryService, resourceName: 'service_orders' });
 const CRUDControllerMethods = makeCRUDController({ resourceService: CRUDService });
 const serviceReportService = makeServiceReportService({ queryBuilder });
-const serviceOrderController = makeServiceOrderController({ serviceReportService, queryBuilder });
+const serviceOrderController = makeServiceOrderController({ serviceReportService, queryBuilder, CRUDControllerMethods });
 
 router.get('/', CRUDControllerMethods.list);
 router.post('/', CRUDControllerMethods.create);
 router.get('/reports', serviceOrderController.getServicePriceCalculation);
-router.patch('/:id', CRUDControllerMethods.update);
+router.patch('/:id', serviceOrderController.update);
 router.get('/:id', CRUDControllerMethods.byId);
 router.delete('/:id', CRUDControllerMethods.delete);
 
