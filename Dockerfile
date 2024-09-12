@@ -1,4 +1,11 @@
-FROM node:12
+FROM node:12-alpine
+
+RUN apk add --no-cache \
+  udev \
+  ttf-freefont \
+  chromium
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
