@@ -1,0 +1,8 @@
+test-api.kincars.com.br {
+    reverse_proxy engine-be:4040
+}
+
+test-app.kincars.com.br {
+    reverse_proxy / engine-fe
+    reverse_proxy engine-fe
+}
