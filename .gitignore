@@ -8,3 +8,6 @@ build
 
 #jest-related
 coverage
+
+#db volume
+db_data

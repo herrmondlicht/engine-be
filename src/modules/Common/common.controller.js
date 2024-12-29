@@ -1,7 +1,3 @@
-export const respondError = (next, e) => {
-  next(e);
-};
-
 const makeList =
   ({ resourceService }) =>
   async (req, res, next) => {
@@ -11,7 +7,7 @@ const makeList =
         data: resourceList,
       });
     } catch (e) {
-      return respondError(next, e);
+      next(e);
     }
   };
 
@@ -29,7 +25,7 @@ const makeGetById =
         message: 'resource was not found',
       });
     } catch (e) {
-      return respondError(next, e);
+      next(e);
     }
   };
 
@@ -47,7 +43,7 @@ const makeCreate =
         data: resource,
       });
     } catch (e) {
-      return respondError(next, e);
+      next(e);
     }
   };
 
@@ -65,7 +61,7 @@ const makeUpdateMethod =
         data: resource,
       });
     } catch (e) {
-      return respondError(next, e);
+      next(e);
     }
   };
 
@@ -82,7 +78,7 @@ const makeDeleteResource =
         data: resource,
       });
     } catch (e) {
-      return respondError(next, e);
+      next(e);
     }
   };
 

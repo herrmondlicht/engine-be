@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import appRoutes from './index.routes';
+import { ERROR_CODES } from './constants/errorCodes';
+import { errorHandlerMiddleware } from './middlewares/errorHandler';
 
 require('dotenv').config();
 
@@ -23,30 +25,7 @@ app.use('/api', appRoutes);
 
 app.get('/', (req, res) => res.send({ api: 'OK' }));
 
-app.use((err, req, res, next) => {
-  console.log('errr not', err);
-  if (err.name === 'UnauthorizedError') {
-    return res.status(401).json({
-      status: 401,
-      message: 'Invalid token',
-    });
-  }
-  if (err) {
-    return next(err);
-  }
-  next();
-});
-
-app.use((err, req, res, next) => {
-  if (err) {
-    console.error(err);
-    return res.status(500).json({
-      status: 500,
-      message: 'something went wrong',
-    });
-  }
-  next();
-});
+app.use(errorHandlerMiddleware(ERROR_CODES));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
