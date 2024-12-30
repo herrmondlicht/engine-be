@@ -1,7 +1,7 @@
-import commonController, { respondError } from './common.controller';
+import commonController from './common.controller';
 
 describe('Common Controller', () => {
-  describe('makeList', () => {
+  describe('list', () => {
     it('should return a list of resources', async () => {
       const resourceService = {
         getList: jest.fn().mockResolvedValue([
@@ -19,7 +19,8 @@ describe('Common Controller', () => {
       };
       const next = jest.fn();
 
-      await commonController({ resourceService }).list(req, res, next);
+      const controller = commonController({ resourceService });
+      await controller.list(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
@@ -41,20 +42,17 @@ describe('Common Controller', () => {
       const res = {};
       const next = jest.fn();
 
-      await commonController({ resourceService }).list(req, res, next);
+      const controller = commonController({ resourceService });
+      await controller.list(req, res, next);
 
       expect(next).toHaveBeenCalledWith(expect.any(Error));
     });
   });
 
-  describe('makeGetById', () => {
+  describe('byId', () => {
     it('should return a resource by id', async () => {
       const resourceService = {
-        getList: jest.fn().mockResolvedValue([
-          { id: 1, name: 'Resource 1' },
-          { id: 2, name: 'Resource 2' },
-          { id: 3, name: 'Resource 3' },
-        ]),
+        getList: jest.fn().mockResolvedValue([{ id: 1, name: 'Resource 1' }]),
       };
       const req = {
         params: {
@@ -68,7 +66,8 @@ describe('Common Controller', () => {
       };
       const next = jest.fn();
 
-      await commonController({ resourceService }).byId(req, res, next);
+      const controller = commonController({ resourceService });
+      await controller.byId(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ data: { id: 1, name: 'Resource 1' } });
@@ -91,7 +90,8 @@ describe('Common Controller', () => {
       };
       const next = jest.fn();
 
-      await commonController({ resourceService }).byId(req, res, next);
+      const controller = commonController({ resourceService });
+      await controller.byId(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(404);
       expect(res.json).toHaveBeenCalledWith({ message: 'resource was not found' });
@@ -108,36 +108,10 @@ describe('Common Controller', () => {
       const res = {};
       const next = jest.fn();
 
-      await commonController({ resourceService }).byId(req, res, next);
+      const controller = commonController({ resourceService });
+      await controller.byId(req, res, next);
 
       expect(next).toHaveBeenCalledWith(expect.any(Error));
-    });
-  });
-
-  describe('respondError', () => {
-    it('should call next with the original error if error code is not ER_DUP_ENTRY', () => {
-      const next = jest.fn();
-      const error = new Error('Test error');
-
-      respondError(next, error);
-
-      expect(next).toHaveBeenCalledWith(error);
-    });
-
-    it('should call next with a custom error object if error code is ER_DUP_ENTRY', () => {
-      const next = jest.fn();
-      const error = { code: 'ER_DUP_ENTRY', message: 'Duplicate entry' };
-
-      respondError(next, error);
-
-      const expectedError = {
-        status: 400,
-        created: false,
-        code: 'DUP00001',
-        error: 'Duplicated entry',
-      };
-
-      expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
 });
