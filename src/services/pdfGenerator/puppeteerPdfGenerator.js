@@ -8,6 +8,7 @@ export const puppeteerPdfGenerator = {
       // Launch browser with optimized settings for PDF generation
       browser = await puppeteer.launch({
         headless: 'new',
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome',
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',

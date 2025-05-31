@@ -1,55 +1,36 @@
-FROM node:20-slim
-
-RUN apt-get update && \
-  apt-get install -y \
-  chromium \
-  wget \
-  ca-certificates \
-  fonts-liberation \
-  libasound2 \
-  libatk-bridge2.0-0 \
-  libatk1.0-0 \
-  libc6 \
-  libcairo2 \
-  libcups2 \
-  libdbus-1-3 \
-  libdrm2 \
-  libgbm1 \
-  libgtk-3-0 \
-  libnspr4 \
-  libnss3 \
-  libpango-1.0-0 \
-  libx11-6 \
-  libx11-xcb1 \
-  libxcb1 \
-  libxcomposite1 \
-  libxdamage1 \
-  libxext6 \
-  libxfixes3 \
-  libxrandr2 \
-  libxshmfence1 \
-  libxss1 \
-  libxtst6 \
-  lsb-release \
-  xdg-utils \
-  --no-install-recommends && \
-  rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+FROM node:20
 
 
-
+# Create app directory
 WORKDIR /home/node/app
 
-COPY --chown=node:node package*.json ./
+# Copy package files
+COPY package*.json ./
 
-USER node
+# Set Puppeteer to use system Chromium and skip download
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
 
+# Install Chromium before npm install
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable && \
+  rm -rf /var/lib/apt/lists/*
+
+# Install dependencies (Puppeteer will skip downloading Chromium)
 RUN npm install --production
 
-COPY --chown=node:node . .
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
+# Copy application code
+COPY . .
+
+# Set ownership of all files to node user
+RUN chown -R node:node /home/node/app
+
+# Switch to node user
+USER node
+
+# Build the application
 RUN npm run build
 
 EXPOSE 4040

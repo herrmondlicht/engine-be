@@ -7,7 +7,7 @@ import { errorHandlerMiddleware } from './middlewares/errorHandler';
 
 require('dotenv').config();
 
-const { PORT } = process.env;
+const { PORT, PUPPETEER_EXECUTABLE_PATH } = process.env;
 
 const app = express();
 
@@ -30,4 +30,6 @@ app.use(errorHandlerMiddleware(ERROR_CODES));
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`App is now running on port ${PORT}`);
+  // eslint-disable-next-line no-console
+  console.log(`PUPPETEER_EXECUTABLE_PATH: ${PUPPETEER_EXECUTABLE_PATH}`);
 });
