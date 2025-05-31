@@ -26,10 +26,11 @@ export const puppeteerPdfGenerator = {
         waitUntil: ['networkidle0', 'domcontentloaded'],
       });
 
-      // Configure PDF options with defaults
+      // Configure PDF options with defaults and better page handling
       const pdfOptions = {
         format: options.format || 'A4',
         printBackground: true,
+        preferCSSPageSize: false,
         margin: {
           top: '20px',
           right: '20px',
@@ -54,3 +55,5 @@ export const puppeteerPdfGenerator = {
     }
   },
 };
+
+export default puppeteerPdfGenerator;
