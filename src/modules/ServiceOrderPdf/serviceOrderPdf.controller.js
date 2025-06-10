@@ -7,7 +7,7 @@ export default ({ getSanitizedServiceOrderData, getPrintableData, serviceOrderSe
       },
     });
 
-    if (!serviceOrderDataRaw) return res.send(404);
+    if (!serviceOrderDataRaw) return res.sendStatus(404);
 
     const [customerCarData, serviceItems] = await getPrintableData(serviceOrderDataRaw);
     const serviceOrderData = getSanitizedServiceOrderData(serviceOrderDataRaw);
