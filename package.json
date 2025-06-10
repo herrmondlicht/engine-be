@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Engine project",
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "main": "index.js",
   "scripts": {
@@ -52,6 +52,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.15",
     "mysql": "^2.18.1",
+    "puppeteer": "^24.9.0",
     "regenerator-runtime": "^0.13.9",
     "sinon": "^13.0.1"
   },
