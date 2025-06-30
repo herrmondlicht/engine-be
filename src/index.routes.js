@@ -6,6 +6,7 @@ import customerRoutes from './modules/Customer/customer.routes';
 import customerCarRoutes from './modules/CustomerCar/customer_car.routes';
 import serviceOrderRoutes from './modules/ServiceOrder/service_order.routes';
 import serviceOrderPdfRoutes from './modules/ServiceOrderPdf/serviceOrderPdf.routes';
+import imageOrderRoutes from './modules/ImageOrder/image_order.routes';
 
 require('dotenv').config();
 
@@ -18,5 +19,10 @@ router.use('/customers', jwt({ secret: SECRET, algorithms: ['HS256'] }), custome
 router.use('/customer_cars', jwt({ secret: SECRET, algorithms: ['HS256'] }), customerCarRoutes);
 router.use('/service_orders', jwt({ secret: SECRET, algorithms: ['HS256'] }), serviceOrderRoutes);
 router.use('/service_orders_pdf', serviceOrderPdfRoutes);
+router.use(
+  '/service_order_images',
+  jwt({ secret: SECRET, algorithms: ['HS256'] }),
+  imageOrderRoutes
+);
 
 export default router;
