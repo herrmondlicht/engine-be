@@ -24,4 +24,19 @@ export const ERROR_CODES = {
     code: 'INTERNAL_ERROR',
     error: 'Something went wrong',
   },
+  LICENSE_PLATE_NOT_FOUND: {
+    status: 400,
+    code: 'LICENSE_PLATE_NOT_FOUND',
+    error: 'License plate not found',
+  },
+  CAR_NOT_FOUND: {
+    status: 400,
+    code: 'CAR_NOT_FOUND',
+    error: 'Car not found',
+  },
+  SERVICE_ORDER_NOT_FOUND: {
+    status: 400,
+    code: 'SERVICE_ORDER_NOT_FOUND',
+    error: 'Service order not found',
+  },
 };
