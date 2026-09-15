@@ -9,6 +9,9 @@ function runConcurrent(knex) {
 }
 
 async function runSeed(knex) {
+  await serviceOrderItems.clear(knex);
+  await serviceOrders.clear(knex);
+  await customerCars.clear(knex);
   await runConcurrent(knex);
   await customerCars.seed(knex);
   await serviceOrders.seed(knex);
