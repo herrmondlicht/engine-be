@@ -20,5 +20,5 @@ export const makeGetPrintableData =
 
 export const makeGetSanitizedServiceOrderData = () => (serviceOrderData) => ({
   ...serviceOrderData,
-  created_at: new Date(serviceOrderData.created_at).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+  created_at: new Date(serviceOrderData.created_at).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
 });
