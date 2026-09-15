@@ -4,6 +4,7 @@ import bindResourcesToRoute from '../../middlewares/bindResourcesToRoute';
 import serviceOrderItemRouter from '../ServiceOrderItem/service_order_item.routes';
 import makeCRUDService from '../../services/makeCRUDService';
 import makeServiceReportService from '../../services/serviceReport';
+import makeServiceOrderService from '../../services/serviceOrderService';
 import makeCRUDController from '../Common/common.controller';
 import { queryService } from '../../services/databaseService/queryService';
 import queryBuilder from '../../services/databaseService/dbOperations/queryBuilder';
@@ -11,8 +12,15 @@ import makeServiceOrderController from './service_order.controller';
 
 const router = express.Router();
 
-const CRUDService = makeCRUDService({ queryService, resourceName: 'service_orders' });
-const CRUDControllerMethods = makeCRUDController({ resourceService: CRUDService });
+const CRUDService = makeCRUDService({
+  queryService,
+  resourceName: 'service_orders',
+  sortableFields: ['id'],
+  defaultOrderBy: 'id',
+  defaultOrder: 'desc',
+});
+const serviceOrderService = makeServiceOrderService({ commonService: CRUDService });
+const CRUDControllerMethods = makeCRUDController({ resourceService: serviceOrderService });
 const serviceReportService = makeServiceReportService({ queryBuilder });
 const serviceOrderController = makeServiceOrderController({ serviceReportService, queryBuilder, CRUDControllerMethods });
 
