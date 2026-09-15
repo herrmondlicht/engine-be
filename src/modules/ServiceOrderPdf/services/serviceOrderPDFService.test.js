@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { makeGetPrintableData } from './serviceOrderPDFService';
+import { makeGetPrintableData, makeGetSanitizedServiceOrderData } from './serviceOrderPDFService';
 
 describe('Service Order PDF', () => {
   it('getePrintableData() should return data found by the repo functions', async () => {
@@ -35,5 +35,19 @@ describe('Service Order PDF', () => {
 
     //then
     expect(result).toStrictEqual([RESPONSE_CUSTOMER_CAR_SERVICE, RESPONSE_SERVICE_ITEMS]);
+  });
+
+  it('formats created_at as a São Paulo date without a time', () => {
+    const sanitizeServiceOrder = makeGetSanitizedServiceOrderData();
+
+    const result = sanitizeServiceOrder({
+      id: 1,
+      created_at: '2025-01-01T01:30:00.000Z',
+    });
+
+    expect(result).toStrictEqual({
+      id: 1,
+      created_at: '31/12/2024',
+    });
   });
 });
