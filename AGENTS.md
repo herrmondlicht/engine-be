@@ -16,6 +16,10 @@ This repository is the Engine API. It is an Express application written in JavaS
 
 ## Setup and development
 
+When working in the shared Engine workspace, run `./engine-dev up -d --build` from the parent directory to start the frontend, backend, and MySQL. The backend runs on port 4040 by default, applies pending migrations at startup, and restarts on edits under `src/`. See the [workspace README](../README.md) for logs, ports, and volume management.
+
+For standalone backend development:
+
 1. Install dependencies with `npm ci`.
 2. Copy `.env.example` to `.env` and configure `PORT`, `SECRET`, `PORTAL_USERNAME`, `PORTAL_PASSWORD`, and `DATABASE_URL`. Set `OPENAI_API_KEY` only for image-order functionality. `PUPPETEER_EXECUTABLE_PATH` must point to an available Chrome/Chromium binary when generating PDFs.
 3. Run `npm run start-dev` to start the API with Nodemon. The local default port is 4040.
