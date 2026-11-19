@@ -16,7 +16,7 @@ This repository is the Engine API. It is an Express application written in JavaS
 
 ## Setup and development
 
-When working in the shared Engine workspace, run `./engine-dev up -d --build` from the parent directory to start the frontend, backend, and MySQL. The backend runs on port 4040 by default, applies pending migrations at startup, and restarts on edits under `src/`. See the [workspace README](../README.md) for logs, ports, and volume management.
+With `engine-fe/` checked out alongside `engine-be/`, run `./engine-dev up -d --build` from `engine-be/` to start the frontend, backend, and MySQL. The backend runs on port 4040 by default, applies pending migrations at startup, and restarts on edits under `src/`. See the [development README](README.dev.md) for logs, ports, and volume management.
 
 For standalone backend development:
 

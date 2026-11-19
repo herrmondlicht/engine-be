@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+backend_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Bind mount sources are resolved by the Docker daemon, which runs outside the agent.
+if [[ -z "${ENGINE_WORKSPACE_DIR:-}" && -f /.dockerenv ]]; then
+  ENGINE_WORKSPACE_DIR="$(docker inspect --type container "$HOSTNAME" --format \
+    '{{range .Mounts}}{{if and (eq .Type "bind") (eq .Destination "/work/workspace")}}{{.Source}}{{end}}{{end}}')"
+  if [[ -z "$ENGINE_WORKSPACE_DIR" ]]; then
+    echo 'Set ENGINE_WORKSPACE_DIR to the workspace path as seen by Docker.' >&2
+    exit 1
+  fi
+  export ENGINE_WORKSPACE_DIR
+fi
+
+exec docker compose -f "$backend_dir/compose.yaml" "$@"

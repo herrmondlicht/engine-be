@@ -1,0 +1,73 @@
+name: engine-dev
+
+services:
+  frontend:
+    build:
+      context: ../engine-fe
+      dockerfile: dev-Dockerfile
+    init: true
+    environment:
+      BROWSER: none
+      HOST: 0.0.0.0
+      PORT: 3000
+      CHOKIDAR_USEPOLLING: "true"
+      REACT_APP_API_SERVICE: ${REACT_APP_API_SERVICE:-http://localhost:${ENGINE_BACKEND_PORT:-4040}}
+    ports:
+      - "127.0.0.1:${ENGINE_FRONTEND_PORT:-3000}:3000"
+    volumes:
+      - type: bind
+        source: ${ENGINE_WORKSPACE_DIR:-..}/engine-fe
+        target: /home/node/react-app
+        bind:
+          create_host_path: false
+      - /home/node/react-app/node_modules
+
+  backend:
+    build:
+      context: .
+      dockerfile: dev-Dockerfile
+    init: true
+    command: ["sh", "-c", "npm run migration && exec npm run start-dev -- --legacy-watch --watch src --ext js,json,ejs"]
+    env_file:
+      - ./.env.example
+      - path: ./.env
+        required: false
+    environment:
+      PORT: 4040
+      DATABASE_URL: mysql://root:engine-dev@db:3306/engine
+      PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium
+    ports:
+      - "127.0.0.1:${ENGINE_BACKEND_PORT:-4040}:4040"
+    volumes:
+      - type: bind
+        source: ${ENGINE_WORKSPACE_DIR:-..}/engine-be
+        target: /home/node/app
+        bind:
+          create_host_path: false
+      - /home/node/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: engine-dev
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - type: bind
+        source: ${ENGINE_WORKSPACE_DIR:-..}/engine-be/database_structure/db_structure.sql
+        target: /docker-entrypoint-initdb.d/01-engine.sql
+        read_only: true
+        bind:
+          create_host_path: false
+    healthcheck:
+      test: ["CMD-SHELL", 'MYSQL_PWD="$$MYSQL_ROOT_PASSWORD" mysql --protocol=tcp -h 127.0.0.1 -uroot engine -e "SELECT 1"']
+      interval: 3s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  mysql-data:
