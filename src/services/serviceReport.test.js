@@ -44,3 +44,36 @@ describe('getServicePriceCalculation', () => {
     expect(result).toEqual([]);
   });
 });
+
+describe('getYearToDateTotals', () => {
+  let queryBuilder;
+  let getYearToDateTotals;
+
+  beforeEach(() => {
+    queryBuilder = {
+      from: sinon.stub().returnsThis(),
+      first: sinon.stub().returnsThis(),
+      raw: sinon.stub().returnsArg(0),
+      sum: sinon.stub().returnsThis(),
+      whereBetween: sinon.stub(),
+    };
+    getYearToDateTotals = serviceReport({ queryBuilder }).getYearToDateTotals;
+  });
+
+  it('sums labor and parts from the start of the current year through now', async () => {
+    const totals = { year: 2026, service_price: '125.50', service_items_price: '240.75' };
+    queryBuilder.whereBetween.resolves(totals);
+
+    await expect(getYearToDateTotals()).resolves.toEqual(totals);
+    expect(queryBuilder.from.calledWith('service_orders')).toBe(true);
+    expect(queryBuilder.sum.calledWith('service_price as service_price')).toBe(true);
+    expect(queryBuilder.sum.calledWith('service_items_price as service_items_price')).toBe(true);
+    expect(queryBuilder.whereBetween.calledWith('created_at', ['makedate(year(current_timestamp), 1)', 'current_timestamp'])).toBe(true);
+  });
+
+  it('returns zero totals when there are no orders in the current year', async () => {
+    queryBuilder.whereBetween.resolves({ year: 2026, service_price: null, service_items_price: null });
+
+    await expect(getYearToDateTotals()).resolves.toEqual({ year: 2026, service_price: 0, service_items_price: 0 });
+  });
+});
