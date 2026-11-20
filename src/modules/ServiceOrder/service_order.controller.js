@@ -1,10 +1,11 @@
 const getReports =
-  ({ serviceReportService, queryBuilder }) =>
+  ({ serviceReportService }) =>
   async (req, res, next) => {
     try {
-      const calculations = await serviceReportService.getServicePriceCalculation(queryBuilder);
+      const [calculations, yearToDate] = await Promise.all([serviceReportService.getServicePriceCalculation(), serviceReportService.getYearToDateTotals()]);
       res.status(200).json({
         data: calculations,
+        yearToDate,
       });
     } catch (e) {
       console.log(e);
@@ -17,7 +18,7 @@ const makeUpdateServiceOrder = (CRUDControllerMethods) => (req, res, next) => {
   return CRUDControllerMethods.update(req, res, next);
 };
 
-export default ({ serviceReportService, queryBuilder, CRUDControllerMethods }) => ({
-  getServicePriceCalculation: getReports({ serviceReportService, queryBuilder }),
+export default ({ serviceReportService, CRUDControllerMethods }) => ({
+  getServicePriceCalculation: getReports({ serviceReportService }),
   update: makeUpdateServiceOrder(CRUDControllerMethods),
 });

@@ -22,7 +22,7 @@ const CRUDService = makeCRUDService({
 const serviceOrderService = makeServiceOrderService({ commonService: CRUDService });
 const CRUDControllerMethods = makeCRUDController({ resourceService: serviceOrderService });
 const serviceReportService = makeServiceReportService({ queryBuilder });
-const serviceOrderController = makeServiceOrderController({ serviceReportService, queryBuilder, CRUDControllerMethods });
+const serviceOrderController = makeServiceOrderController({ serviceReportService, CRUDControllerMethods });
 
 router.get('/', CRUDControllerMethods.list);
 router.post('/', CRUDControllerMethods.create);
